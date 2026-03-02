@@ -1,840 +1,840 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Secrets Facebook Hack™ Impact Calculator</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Secrets Facebook Hack™ Impact Calculator</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-  <style>
-    :root {
-      --primary-blue:#01B7FF;
-      --accent-yellow:#FFC82D;
-      --black:#000000;
-      --white:#FFFFFF;
-      --dark-bg:#101421;
-      --light-gray:#A09E9F;
-      --success-green:#1BD760;
+  <style>
+    :root {
+      --primary-blue:#01B7FF;
+      --accent-yellow:#FFC82D;
+      --black:#000000;
+      --white:#FFFFFF;
+      --dark-bg:#101421;
+      --light-gray:#A09E9F;
+      --success-green:#1BD760;
 
-      --danger-red:#FF4D4D;
-      --output-red:#B20D00;
+      --danger-red:#FF4D4D;
+      --output-red:#B20D00;
 
-      --border:rgba(255,255,255,0.08);
-      --input-border:rgba(15,23,42,0.18);
-      --shadow: 0 16px 40px rgba(0,0,0,0.35);
-      --focus: 0 0 0 4px rgba(1,183,255,0.18);
-    }
+      --border:rgba(255,255,255,0.08);
+      --input-border:rgba(15,23,42,0.18);
+      --shadow: 0 16px 40px rgba(0,0,0,0.35);
+      --focus: 0 0 0 4px rgba(1,183,255,0.18);
+    }
 
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; }
 
-    body {
-      margin: 0;
-      font-family: 'Montserrat', sans-serif;
-      background-color: var(--dark-bg);
-      color: var(--white);
-    }
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--dark-bg);
+      color: var(--white);
+    }
 
-    /* HERO */
-    .hero {
-      padding: 70px 20px 70px;
-      text-align: center;
-      background: linear-gradient(180deg, #000000 0%, #101421 100%);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
+    /* HERO */
+    .hero {
+      padding: 70px 20px 70px;
+      text-align: center;
+      background: linear-gradient(180deg, #000000 0%, #101421 100%);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
 
-    .hero-inner {
-      max-width: 980px;
-      margin: 0 auto;
-      display: grid;
-      gap: 18px;
-      justify-items: center;
-    }
+    .hero-inner {
+      max-width: 980px;
+      margin: 0 auto;
+      display: grid;
+      gap: 18px;
+      justify-items: center;
+    }
 
-    .logo {
-      width: min(860px, 92vw);
-      height: auto;
-      display: block;
-      filter: drop-shadow(0 0 24px rgba(1,183,255,0.18));
-    }
+    .logo {
+      width: min(860px, 92vw);
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 0 24px rgba(1,183,255,0.18));
+    }
 
-    .hero h1 {
-      font-size: 42px;
-      font-weight: 800;
-      margin: 0;
-      letter-spacing: -0.5px;
-      line-height: 1.05;
-    }
+    .hero h1 {
+      font-size: 42px;
+      font-weight: 800;
+      margin: 0;
+      letter-spacing: -0.5px;
+      line-height: 1.05;
+    }
 
-    .hero span { color: var(--accent-yellow); }
+    .hero span { color: var(--accent-yellow); }
 
-    .hero-vs { color: var(--primary-blue); }
+    .hero-vs { color: var(--primary-blue); }
 
-    .hero p {
-      color: var(--light-gray);
-      font-size: 18px;
-      max-width: 820px;
-      margin: 0;
-      line-height: 1.5;
-    }
+    .hero p {
+      color: var(--light-gray);
+      font-size: 18px;
+      max-width: 820px;
+      margin: 0;
+      line-height: 1.5;
+    }
 
-    .hero .ownership {
-      font-size: 12px;
-      color: rgba(255,255,255,0.65);
-      margin-top: 2px;
-    }
+    .hero .ownership {
+      font-size: 12px;
+      color: rgba(255,255,255,0.65);
+      margin-top: 2px;
+    }
 
-    /* MAIN WRAPPER */
-    .wrapper {
-      max-width: 1500px;
-      margin: -40px auto 80px;
-      padding: 0 20px;
-    }
+    /* MAIN WRAPPER */
+    .wrapper {
+      max-width: 1500px;
+      margin: -40px auto 80px;
+      padding: 0 20px;
+    }
 
-    /* CARD LAYOUT */
-    .calculator-container {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 30px;
-      align-items: stretch; /* (1) match height to tallest column */
-    }
+    /* CARD LAYOUT */
+    .calculator-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 30px;
+      align-items: stretch; /* (1) match height to tallest column */
+    }
 
-    .card {
-      background-color: var(--black);
-      padding: 40px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      height: 100%; /* (1) match height to tallest column */
-    }
+    .card {
+      background-color: var(--black);
+      padding: 40px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      height: 100%; /* (1) match height to tallest column */
+    }
 
-    /* FORM */
-    .card h2 {
-      margin-top: 0;
-      font-size: 24px;
-      margin-bottom: 8px;
-      color: var(--primary-blue);
-      font-weight: 800;
-      text-transform: uppercase;
-    }
+    /* FORM */
+    .card h2 {
+      margin-top: 0;
+      font-size: 24px;
+      margin-bottom: 8px;
+      color: var(--primary-blue);
+      font-weight: 800;
+      text-transform: uppercase;
+    }
 
-    .subhead {
-      color: rgba(255,255,255,0.75);
-      font-size: 13px;
-      margin-bottom: 24px;
-      line-height: 1.45;
-    }
+    .subhead {
+      color: rgba(255,255,255,0.75);
+      font-size: 13px;
+      margin-bottom: 24px;
+      line-height: 1.45;
+    }
 
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px 18px;
-      margin-bottom: 18px;
-    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px 18px;
+      margin-bottom: 18px;
+    }
 
-    .field { display: grid; gap: 8px; }
-    .field.full { grid-column: 1 / -1; }
+    .field { display: grid; gap: 8px; }
+    .field.full { grid-column: 1 / -1; }
 
-    label {
-      font-weight: 600;
-      font-size: 13px;
-      color: rgba(255,255,255,0.85);
-    }
+    label {
+      font-weight: 600;
+      font-size: 13px;
+      color: rgba(255,255,255,0.85);
+    }
 
-    input[type="text"] {
-      width: 100%;
-      padding: 14px;
-      border-radius: 8px;
-      border: 1px solid var(--input-border);
-      background-color: var(--white);
-      color: var(--black);
-      font-size: 16px;
-      outline: none;
-    }
+    input[type="text"] {
+      width: 100%;
+      padding: 14px;
+      border-radius: 8px;
+      border: 1px solid var(--input-border);
+      background-color: var(--white);
+      color: var(--black);
+      font-size: 16px;
+      outline: none;
+    }
 
-    input::placeholder { color: rgba(0,0,0,0.40); }
+    input::placeholder { color: rgba(0,0,0,0.40); }
 
-    input:focus {
-      border-color: var(--primary-blue);
-      box-shadow: var(--focus);
-    }
+    input:focus {
+      border-color: var(--primary-blue);
+      box-shadow: var(--focus);
+    }
 
-    .help {
-      margin-top: -2px;
-      font-size: 12px;
-      color: rgba(255,255,255,0.65);
-      line-height: 1.35;
-    }
+    .help {
+      margin-top: -2px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.35;
+    }
 
-    /* Sliders */
-    .slider-wrap {
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 14px;
-      background: rgba(255,255,255,0.03);
-    }
+    /* Sliders */
+    .slider-wrap {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      background: rgba(255,255,255,0.03);
+    }
 
-    .slider-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 10px;
-      margin-bottom: 10px;
-      flex-wrap: wrap;
-    }
+    .slider-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
 
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 10px;
-      background: var(--primary-blue);
-      color: var(--black);
-      border-radius: 999px;
-      font-weight: 800;
-      font-size: 12px;
-      white-space: nowrap;
-      box-shadow: 0 12px 28px rgba(1,183,255,0.25);
-    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      background: var(--primary-blue);
+      color: var(--black);
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 12px;
+      white-space: nowrap;
+      box-shadow: 0 12px 28px rgba(1,183,255,0.25);
+    }
 
-    input[type="range"] {
-      width: 100%;
-      accent-color: var(--primary-blue);
-    }
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--primary-blue);
+    }
 
-    .slider-labels {
-      display: flex;
-      justify-content: space-between;
-      font-size: 12px;
-      color: rgba(255,255,255,0.70);
-      margin-top: 6px;
-      user-select: none;
-    }
+    .slider-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: rgba(255,255,255,0.70);
+      margin-top: 6px;
+      user-select: none;
+    }
 
-    button {
-      width: 100%;
-      padding: 16px;
-      background-color: var(--primary-blue);
-      border: none;
-      border-radius: 8px;
-      color: var(--black);
-      font-weight: 700;
-      font-size: 16px;
-      cursor: pointer;
-      transition: 0.2s;
-    }
+    button {
+      width: 100%;
+      padding: 16px;
+      background-color: var(--primary-blue);
+      border: none;
+      border-radius: 8px;
+      color: var(--black);
+      font-weight: 700;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
 
-    button:hover { background-color: var(--accent-yellow); }
+    button:hover { background-color: var(--accent-yellow); }
 
-    .btn-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-top: 14px;
-    }
+    .btn-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
 
-    .btn-secondary {
-      background: transparent;
-      color: var(--white);
-      border: 1px solid var(--border);
-    }
-    .btn-secondary:hover { background: rgba(255,255,255,0.05); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--white);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.05); }
 
-    /* Errors */
-    .errors {
-      margin-top: 16px;
-      border: 1px solid rgba(255,77,77,0.35);
-      background: rgba(255,77,77,0.10);
-      border-radius: 10px;
-      padding: 12px 14px;
-      display: none;
-    }
-    .errors ul { margin: 0; padding-left: 18px; }
-    .errors li { margin: 5px 0; color: rgba(255,255,255,0.92); }
+    /* Errors */
+    .errors {
+      margin-top: 16px;
+      border: 1px solid rgba(255,77,77,0.35);
+      background: rgba(255,77,77,0.10);
+      border-radius: 10px;
+      padding: 12px 14px;
+      display: none;
+    }
+    .errors ul { margin: 0; padding-left: 18px; }
+    .errors li { margin: 5px 0; color: rgba(255,255,255,0.92); }
 
-    /* RESULTS */
-    .results h3 {
-      font-size: 14px;
-      color: var(--light-gray);
-      margin: 0 0 10px;
-      letter-spacing: 0.02em;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
+    /* RESULTS */
+    .results h3 {
+      font-size: 14px;
+      color: var(--light-gray);
+      margin: 0 0 10px;
+      letter-spacing: 0.02em;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
 
-    .result-box {
-      border-top: 1px solid var(--border);
-      padding-top: 18px;
-      margin-top: 18px;
-    }
+    .result-box {
+      border-top: 1px solid var(--border);
+      padding-top: 18px;
+      margin-top: 18px;
+    }
 
-    .results-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px 18px;
-      margin-top: 10px;
-    }
+    .results-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px 18px;
+      margin-top: 10px;
+    }
 
-    .results-grid .tile {
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 14px;
-      background: rgba(255,255,255,0.03);
-    }
+    .results-grid .tile {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+      background: rgba(255,255,255,0.03);
+    }
 
-    .tile .k {
-      font-size: 13px;
-      color: rgba(255,255,255,0.70);
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
+    .tile .k {
+      font-size: 13px;
+      color: rgba(255,255,255,0.70);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
 
-    .tile .v {
-      font-size: 18px;
-      font-weight: 800;
-      color: var(--white);
-    }
+    .tile .v {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--white);
+    }
 
-    .tile .v.output-red { color: var(--output-red); }
+    .tile .v.output-red { color: var(--output-red); }
 
-    .impact-line {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 10px;
-      color: rgba(255,255,255,0.80);
-      font-size: 14px;
-    }
+    .impact-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+      color: rgba(255,255,255,0.80);
+      font-size: 14px;
+    }
 
-    .annual-savings {
-      font-size: 46px;
-      font-weight: 800;
-      margin: 6px 0 10px;
-    }
+    .annual-savings {
+      font-size: 46px;
+      font-weight: 800;
+      margin: 6px 0 10px;
+    }
 
-    .annual-savings.good { color: var(--success-green); }
-    .annual-savings.bad { color: var(--danger-red); }
+    .annual-savings.good { color: var(--success-green); }
+    .annual-savings.bad { color: var(--danger-red); }
 
-    .assumptions {
-      margin-top: 16px;
-      color: rgba(255,255,255,0.65);
-      font-size: 12px;
-      line-height: 1.45;
-      border-top: 1px solid var(--border);
-      padding-top: 14px;
-    }
+    .assumptions {
+      margin-top: 16px;
+      color: rgba(255,255,255,0.65);
+      font-size: 12px;
+      line-height: 1.45;
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+    }
 
-    /* FOOTER CTA */
-    .cta-section {
-      margin-top: 60px;
-      text-align: center;
-    }
+    /* FOOTER CTA */
+    .cta-section {
+      margin-top: 60px;
+      text-align: center;
+    }
 
-    .cta-section h2 {
-      font-size: 28px;
-      margin-bottom: 20px;
-      font-weight: 800;
-    }
+    .cta-section h2 {
+      font-size: 28px;
+      margin-bottom: 20px;
+      font-weight: 800;
+    }
 
-    .cta-section button { max-width: 320px; }
+    .cta-section button { max-width: 320px; }
 
-    /* RESPONSIVE */
-    @media (max-width: 899px) {
-      .calculator-container { grid-template-columns: 1fr; }
-      .annual-savings { font-size: 40px; }
-      .hero h1 { font-size: 32px; }
-      .results-grid { grid-template-columns: 1fr; }
-      .grid { grid-template-columns: 1fr; }
-    }
-  </style>
+    /* RESPONSIVE */
+    @media (max-width: 899px) {
+      .calculator-container { grid-template-columns: 1fr; }
+      .annual-savings { font-size: 40px; }
+      .hero h1 { font-size: 32px; }
+      .results-grid { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 
 <body>
-  <section class="hero">
-    <div class="hero-inner">
-      <img class="logo" src="./SecretsFBHack.png" alt="Secrets Facebook Hack" />
-      <h1>
-        YOUR CURRENT FACEBOOK EVENT<br>
-        <span class="hero-vs">VS</span><br>
-        <span>SECRETS FACEBOOK HACK™</span>
-      </h1>
-      <p>
-        Use this calculator to compare your current campaign economics against the Secrets Facebook Hack™ program
-        (owned and operated by Johnson Advertising) and see your 12-month financial impact.
-      </p>
-      <div class="ownership">Secrets Facebook Hack™ is owned and operated by <strong>Johnson Advertising</strong>.</div>
-    </div>
-  </section>
-
-  <div class="wrapper">
-    <div class="calculator-container">
-
-      <!-- COLUMN 1 -->
-      <div class="card">
-        <h2>Current Facebook Event Numbers</h2>
-        <div class="subhead">
-          Appointments auto-fill at <strong>60%</strong> of leads if left blank. Events per year are enforced at <strong>1–12</strong>.
-        </div>
-
-        <div class="grid">
-          <div class="field">
-            <label for="curSpend">Current Fee Per Event ($)</label>
-            <input type="text" id="curSpend" inputmode="decimal" placeholder="e.g. 12000" />
-          </div>
-
-          <div class="field">
-            <label for="curLeads">Leads Generated Per Event</label>
-            <input type="text" id="curLeads" inputmode="numeric" placeholder="e.g. 120" />
-          </div>
-
-          <div class="field full">
-            <label>Estimated Ad Spend Portion (Included in Current Fee)</label>
-            <div class="slider-wrap">
-              <div class="slider-top">
-                <div class="pill">Selected: <span id="curAdSelected">$2,500</span></div>
-              </div>
-              <input id="curAdSlider" type="range" min="500" max="2500" step="500" value="2500" />
-              <div class="slider-labels">
-                <span>$500</span><span>$1,500</span><span>$2,500</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="field">
-            <label for="curAppts">Appointments Set Per Event (optional)</label>
-            <input type="text" id="curAppts" inputmode="numeric" placeholder="auto = 60% of leads" />
-            <div class="help">If blank, appointments = 60% of leads.</div>
-          </div>
-
-          <div class="field">
-            <label for="curClose">Closing Rate (%)</label>
-            <input type="text" id="curClose" inputmode="decimal" placeholder="e.g. 25" />
-            <div class="help">&nbsp;</div>
-          </div>
-
-          <div class="field">
-            <label for="curRuns">Events Per Year</label>
-            <input type="text" id="curRuns" inputmode="numeric" placeholder="1–12" value="12" />
-          </div>
-
-          <div class="field">
-            <label for="curDays">Days Per Event</label>
-            <input type="text" id="curDays" inputmode="numeric" placeholder="min 1" value="1" />
-          </div>
-        </div>
-      </div>
-
-      <!-- COLUMN 2 -->
-      <div class="card">
-        <h2>Secrets Facebook Hack Numbers</h2>
-        <div class="subhead">
-          Dealer budgets and uses dealer ad account. Johnson Advertising does not require ad dollars.
-        </div>
-
-        <div class="grid">
-          <div class="field">
-            <label for="jaRuns">Secrets Events Per Year</label>
-            <input type="text" id="jaRuns" inputmode="numeric" placeholder="1–12" value="12" />
-          </div>
-
-          <div class="field full">
-            <label>Dealer Ad Spend Per Event (Used for Secrets Projections)</label>
-            <div class="slider-wrap">
-              <div class="slider-top">
-                <div class="pill">Selected: <span id="jaAdSelected">$2,500</span></div>
-              </div>
-              <input id="jaAdSlider" type="range" min="500" max="5000" step="500" value="2500" />
-              <div class="slider-labels">
-                <span>$500</span><span>$2,500</span><span>$5,000</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="field full">
-            <label>Cost Per Lead Projection (Scenario)</label>
-            <div class="slider-wrap">
-              <div class="slider-top">
-                <div class="pill">Selected: <span id="cplSelected">$5.00</span></div>
-              </div>
-              <input id="cplSlider" type="range" min="0" max="2" step="1" value="1" />
-              <div class="slider-labels">
-                <span>$2.50</span><span>$5.00</span><span>$7.50</span>
-              </div>
-
-              <div class="help" style="margin-top:10px">
-                <strong>Fixed annual fees (always 12 months):</strong>
-                $9,000 licensing + $1,000/mo management + $250/mo graphics.
-                <br />
-                <strong>Variable:</strong> Dealer ad spend is multiplied by Secrets events selected during the 12-month span.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="btn-row">
-          <button type="button" id="btnCalc">Calculate 12-Month Impact</button>
-          <button type="button" class="btn-secondary" id="btnReset">Reset</button>
-        </div>
-
-        <div class="errors" id="errors" role="alert" aria-live="assertive"></div>
-      </div>
-
-      <!-- COLUMN 3 -->
-      <div class="card results">
-        <h2>Net Results</h2>
-        <div class="subhead">Calculated from your current event numbers and Secrets projections.</div>
-
-        <div class="result-box">
-          <h3>Current Performance</h3>
-          <div class="results-grid">
-            <div class="tile">
-              <div class="k">Cost Per Lead</div>
-              <div class="v" id="outCurCPL">—</div>
-            </div>
-            <div class="tile">
-              <div class="k">Appointment Ratio</div>
-              <div class="v" id="outCurApptRatio">—</div>
-            </div>
-            <div class="tile">
-              <div class="k">Cost Per Sold</div>
-              <div class="v" id="outCurCPS">—</div>
-            </div>
-            <div class="tile">
-              <div class="k">Cost Per Day</div>
-              <div class="v" id="outCurCPD">—</div>
-            </div>
-            <div class="tile" style="grid-column:1/-1">
-              <div class="k">Annual Spend</div>
-              <div class="v" id="outCurAnnual">—</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="result-box">
-          <h3>Secrets Facebook Hack™ Performance (Projected)</h3>
-          <div class="results-grid">
-            <div class="tile">
-              <div class="k">Cost Per Lead</div>
-              <div class="v" id="outJaCPL">—</div>
-            </div>
-            <div class="tile">
-              <div class="k">Cost Per Sold</div>
-              <div class="v" id="outJaCPS">—</div>
-            </div>
-            <div class="tile" style="grid-column:1/-1">
-              <div class="k">Annual Investment</div>
-              <div class="v" id="outJaAnnual">—</div>
-            </div>
-          </div>
-
-          <div class="assumptions" id="outAssumptions">—</div>
-        </div>
-
-        <div class="result-box">
-          <h3>12-Month Financial Impact</h3>
-          <div class="impact-line">
-            <span id="impactLabel">Annual Savings</span>
-            <span id="impactPct">—</span>
-          </div>
-          <div class="annual-savings" id="impactValue">—</div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="cta-section">
-      <h2>Take Control of Your Advertising</h2>
-      <button type="button" onclick="window.open('https://calendly.com/troberts-johnsonads/secrets','_blank','noopener')">
-        Schedule Strategy Call
-      </button>
-    </div>
-  </div>
-
-  <script>
-    (function () {
-      const SECRETS_ANNUAL_LICENSING = 9000;
-      const SECRETS_MGMT_MONTHLY = 1000;
-      const SECRETS_GRAPHICS_MONTHLY = 250;
-
-      const DEFAULT_APPT_RATIO = 0.60;
-      const CPL_OPTIONS = [2.5, 5.0, 7.5];
-
-      const els = {
-        curSpend: document.getElementById('curSpend'),
-        curLeads: document.getElementById('curLeads'),
-        curAppts: document.getElementById('curAppts'),
-        curClose: document.getElementById('curClose'),
-        curRuns: document.getElementById('curRuns'),
-        curDays: document.getElementById('curDays'),
-
-        curAdSlider: document.getElementById('curAdSlider'),
-        curAdSelected: document.getElementById('curAdSelected'),
-
-        jaRuns: document.getElementById('jaRuns'),
-        jaAdSlider: document.getElementById('jaAdSlider'),
-        jaAdSelected: document.getElementById('jaAdSelected'),
-
-        cplSlider: document.getElementById('cplSlider'),
-        cplSelected: document.getElementById('cplSelected'),
-
-        btnCalc: document.getElementById('btnCalc'),
-        btnReset: document.getElementById('btnReset'),
-        errors: document.getElementById('errors'),
-
-        outCurCPL: document.getElementById('outCurCPL'),
-        outCurApptRatio: document.getElementById('outCurApptRatio'),
-        outCurCPS: document.getElementById('outCurCPS'),
-        outCurCPD: document.getElementById('outCurCPD'),
-        outCurAnnual: document.getElementById('outCurAnnual'),
-
-        outJaCPL: document.getElementById('outJaCPL'),
-        outJaCPS: document.getElementById('outJaCPS'),
-        outJaAnnual: document.getElementById('outJaAnnual'),
-
-        impactLabel: document.getElementById('impactLabel'),
-        impactPct: document.getElementById('impactPct'),
-        impactValue: document.getElementById('impactValue'),
-
-        outAssumptions: document.getElementById('outAssumptions'),
-      };
-
-      function toNumber(raw) {
-        const s = String(raw ?? '').trim();
-        if (!s) return NaN;
-        const cleaned = s.replace(/[$,%\s,]/g, '');
-        const n = Number(cleaned);
-        return Number.isFinite(n) ? n : NaN;
-      }
-
-      function intOf(raw) {
-        const n = toNumber(raw);
-        if (!Number.isFinite(n)) return NaN;
-        return Math.trunc(n);
-      }
-
-      function safeDiv(a, b) {
-        if (!Number.isFinite(a) || !Number.isFinite(b) || b === 0) return NaN;
-        return a / b;
-      }
-
-      function money(n) {
-        if (!Number.isFinite(n)) return '—';
-        return n.toLocaleString(undefined, { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 });
-      }
-
-      function pct(n) {
-        if (!Number.isFinite(n)) return '—';
-        return `${n.toLocaleString(undefined, { minimumFractionDigits: 1, maximumFractionDigits: 1 })}%`;
-      }
-
-      function ratio(n) {
-        if (!Number.isFinite(n)) return '—';
-        return n.toLocaleString(undefined, { minimumFractionDigits: 3, maximumFractionDigits: 3 });
-      }
-
-      function selectedCpl() {
-        const idx = Math.max(0, Math.min(2, Math.trunc(toNumber(els.cplSlider.value))));
-        return CPL_OPTIONS[idx];
-      }
-
-      function escapeHtml(str) {
-        return String(str)
-          .replace(/&/g, '&amp;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/"/g, '&quot;')
-          .replace(/'/g, '&#039;');
-      }
-
-      function showErrors(messages) {
-        if (!messages.length) {
-          els.errors.style.display = 'none';
-          els.errors.innerHTML = '';
-          return;
-        }
-        els.errors.style.display = 'block';
-        els.errors.innerHTML = '<ul>' + messages.map(m => `<li>${escapeHtml(m)}</li>`).join('') + '</ul>';
-      }
-
-      function setCurOutputRed(on) {
-        [els.outCurCPL, els.outCurCPS, els.outCurCPD, els.outCurAnnual].forEach((el) => {
-          el.classList.toggle('output-red', !!on);
-        });
-      }
-
-      function clearOutputs() {
-        [
-          els.outCurCPL, els.outCurApptRatio, els.outCurCPS, els.outCurCPD, els.outCurAnnual,
-          els.outJaCPL, els.outJaCPS, els.outJaAnnual,
-          els.impactPct, els.impactValue
-        ].forEach(n => (n.textContent = '—'));
-        els.impactLabel.textContent = 'Annual Savings';
-        els.impactValue.classList.remove('good', 'bad');
-        els.outAssumptions.textContent = '—';
-        setCurOutputRed(false);
-      }
-
-      function annualSecretsInvestment(eventsPerYear, dealerAdSpendPerEvent) {
-        const fixed = SECRETS_ANNUAL_LICENSING + (SECRETS_MGMT_MONTHLY * 12) + (SECRETS_GRAPHICS_MONTHLY * 12);
-        return fixed + (eventsPerYear * dealerAdSpendPerEvent);
-      }
-
-      function readInputs() {
-        const curLeads = intOf(els.curLeads.value);
-        const curApptsRaw = String(els.curAppts.value ?? '').trim();
-        const curApptsUser = intOf(curApptsRaw);
-
-        const curAppts =
-          curApptsRaw === '' && Number.isFinite(curLeads) && curLeads > 0
-            ? Math.round(curLeads * DEFAULT_APPT_RATIO)
-            : curApptsUser;
-
-        return {
-          curFeePerEvent: toNumber(els.curSpend.value),
-          curLeads,
-          curAppts,
-          curApptsWasAuto: curApptsRaw === '',
-          curClose: toNumber(els.curClose.value),
-          curEventsPerYear: intOf(els.curRuns.value),
-          curDays: intOf(els.curDays.value),
-
-          curHiddenAdSpend: intOf(els.curAdSlider.value), // reference only
-
-          secretsEventsPerYear: intOf(els.jaRuns.value),
-          secretsDealerAdSpend: intOf(els.jaAdSlider.value),
-
-          cpl: selectedCpl(),
-        };
-      }
-
-      function validate(i) {
-        const errs = [];
-
-        if (!(i.curFeePerEvent > 0)) errs.push('Current Fee Per Event must be greater than 0.');
-        if (!(i.curLeads > 0)) errs.push('Leads Generated Per Event must be greater than 0.');
-        if (!(i.curAppts >= 0)) errs.push('Appointments Set Per Event must be 0 or greater.');
-        if (i.curAppts > i.curLeads) errs.push('Appointments Set Per Event cannot exceed Leads Generated Per Event.');
-        if (!(i.curClose >= 0 && i.curClose <= 100)) errs.push('Closing Rate must be between 0 and 100.');
-        if (!Number.isInteger(i.curEventsPerYear) || i.curEventsPerYear < 1 || i.curEventsPerYear > 12) errs.push('Events Per Year must be an integer between 1 and 12.');
-        if (!Number.isInteger(i.curDays) || i.curDays < 1) errs.push('Days Per Event must be an integer of at least 1.');
-
-        if (!Number.isInteger(i.secretsEventsPerYear) || i.secretsEventsPerYear < 1 || i.secretsEventsPerYear > 12) errs.push('Secrets Events Per Year must be an integer between 1 and 12.');
-        if (!Number.isInteger(i.secretsDealerAdSpend) || i.secretsDealerAdSpend < 500 || i.secretsDealerAdSpend > 5000) errs.push('Dealer Ad Spend must be between $500 and $5,000.');
-
-        if (!Number.isInteger(i.curHiddenAdSpend) || i.curHiddenAdSpend < 500 || i.curHiddenAdSpend > 2500) errs.push('Estimated ad spend portion must be between $500 and $2,500.');
-
-        const salesCur = i.curAppts * (i.curClose / 100);
-        if (!(salesCur > 0)) errs.push('Sales Per Event (current) is 0 (appointments or closing rate too low). Cost Per Sold cannot be calculated.');
-
-        const secretsAnnual = annualSecretsInvestment(i.secretsEventsPerYear, i.secretsDealerAdSpend);
-        if (!(secretsAnnual > 0)) errs.push('Secrets annual investment could not be computed.');
-
-        const projectedLeads = i.secretsDealerAdSpend / i.cpl;
-        if (!(projectedLeads > 0)) errs.push('Projected leads could not be computed from dealer ad spend and CPL.');
-
-        const apptRatioCur = safeDiv(i.curAppts, i.curLeads);
-        const projectedSales = (projectedLeads * apptRatioCur) * (i.curClose / 100);
-        if (!(projectedSales > 0)) errs.push('Projected sales is 0. Cost Per Sold cannot be calculated.');
-
-        return errs;
-      }
-
-      function syncSliderLabels() {
-        const curAd = intOf(els.curAdSlider.value);
-        const jaAd = intOf(els.jaAdSlider.value);
-        els.curAdSelected.textContent = money(curAd).replace('US', '').trim();
-        els.jaAdSelected.textContent = money(jaAd).replace('US', '').trim();
-        els.cplSelected.textContent = money(selectedCpl()).replace('US', '').trim();
-      }
-
-      function calculate() {
-        const i = readInputs();
-        const errs = validate(i);
-        if (errs.length) {
-          showErrors(errs);
-          clearOutputs();
-          return;
-        }
-        showErrors([]);
-
-        const curCPL = safeDiv(i.curFeePerEvent, i.curLeads);
-        const apptRatioCur = safeDiv(i.curAppts, i.curLeads);
-        const salesCur = i.curAppts * (i.curClose / 100);
-        const curCPS = safeDiv(i.curFeePerEvent, salesCur);
-        const curCPD = safeDiv(i.curFeePerEvent, i.curDays);
-        const curAnnual = i.curFeePerEvent * i.curEventsPerYear;
-
-        const secretsAnnual = annualSecretsInvestment(i.secretsEventsPerYear, i.secretsDealerAdSpend);
-        const secretsCostPerEventAvg = safeDiv(secretsAnnual, i.secretsEventsPerYear);
-
-        const projectedLeads = i.secretsDealerAdSpend / i.cpl;
-        const projectedAppts = projectedLeads * apptRatioCur;
-        const projectedSales = projectedAppts * (i.curClose / 100);
-
-        const secretsCPL = safeDiv(secretsCostPerEventAvg, projectedLeads);
-        const secretsCPS = safeDiv(secretsCostPerEventAvg, projectedSales);
-
-        const savings = curAnnual - secretsAnnual;
-        const improvement = safeDiv(savings, curAnnual) * 100;
-
-        els.outCurCPL.textContent = money(curCPL);
-        els.outCurApptRatio.textContent = ratio(apptRatioCur);
-        els.outCurCPS.textContent = money(curCPS);
-        els.outCurCPD.textContent = money(curCPD);
-        els.outCurAnnual.textContent = money(curAnnual);
-
-        els.outJaCPL.textContent = money(secretsCPL);
-        els.outJaCPS.textContent = money(secretsCPS);
-        els.outJaAnnual.textContent = money(secretsAnnual);
-
-        setCurOutputRed(true);
-
-        const isSavings = savings >= 0;
-        els.impactLabel.textContent = isSavings ? 'Annual Savings' : 'Additional Annual Investment';
-        els.impactPct.textContent = `Percentage Improvement: ${pct(improvement)}`;
-        els.impactValue.textContent = money(Math.abs(savings));
-        els.impactValue.classList.remove('good', 'bad');
-        els.impactValue.classList.add(isSavings ? 'good' : 'bad');
-
-        const fixedAnnual = SECRETS_ANNUAL_LICENSING + (SECRETS_MGMT_MONTHLY * 12) + (SECRETS_GRAPHICS_MONTHLY * 12);
-        const variableAnnual = i.secretsEventsPerYear * i.secretsDealerAdSpend;
-
-        const notes = [];
-        notes.push(`Current fee per event: ${money(i.curFeePerEvent)}.`);
-        notes.push(`Estimated ad spend portion (reference only): ${money(i.curHiddenAdSpend)}.`);
-        notes.push(`Secrets annual investment = fixed annual fees ${money(fixedAnnual)} + ad spend total (${i.secretsEventsPerYear} events × ${money(i.secretsDealerAdSpend)}) = ${money(variableAnnual)}.`);
-        notes.push(`Projected leads per event = ${money(i.secretsDealerAdSpend)} ÷ ${money(i.cpl)} ≈ ${Math.round(projectedLeads)}.`);
-        if (i.curApptsWasAuto) notes.push('Appointments auto-filled at 60% of leads because field was blank.');
-        els.outAssumptions.textContent = notes.join(' ');
-      }
-
-      function reset() {
-        ['curSpend','curLeads','curAppts','curClose'].forEach(id => (document.getElementById(id).value = ''));
-        els.curRuns.value = '12';
-        els.curDays.value = '1';
-        els.jaRuns.value = '12';
-
-        els.curAdSlider.value = '2500';
-        els.jaAdSlider.value = '2500';
-        els.cplSlider.value = '1';
-
-        syncSliderLabels();
-        showErrors([]);
-        clearOutputs();
-      }
-
-      els.btnCalc.addEventListener('click', calculate);
-      els.btnReset.addEventListener('click', reset);
-
-      els.curAdSlider.addEventListener('input', syncSliderLabels);
-      els.jaAdSlider.addEventListener('input', syncSliderLabels);
-      els.cplSlider.addEventListener('input', syncSliderLabels);
-
-      syncSliderLabels();
-      clearOutputs();
-    })();
-  </script>
+  <section class="hero">
+    <div class="hero-inner">
+      <img class="logo" src="./SecretsFBHack.png" alt="Secrets Facebook Hack" />
+      <h1>
+        YOUR CURRENT FACEBOOK EVENT<br>
+        <span class="hero-vs">VS</span><br>
+        <span>SECRETS FACEBOOK HACK™</span>
+      </h1>
+      <p>
+        Use this calculator to compare your current campaign economics against the Secrets Facebook Hack™ program
+        (owned and operated by Johnson Advertising) and see your 12-month financial impact.
+      </p>
+      <div class="ownership">Secrets Facebook Hack™ is owned and operated by <strong>Johnson Advertising</strong>.</div>
+    </div>
+  </section>
+
+  <div class="wrapper">
+    <div class="calculator-container">
+
+      <!-- COLUMN 1 -->
+      <div class="card">
+        <h2>Current Facebook Event Numbers</h2>
+        <div class="subhead">
+          Appointments auto-fill at <strong>60%</strong> of leads if left blank. Events per year are enforced at <strong>1–12</strong>.
+        </div>
+
+        <div class="grid">
+          <div class="field">
+            <label for="curSpend">Current Fee Per Event ($)</label>
+            <input type="text" id="curSpend" inputmode="decimal" placeholder="e.g. 12000" />
+          </div>
+
+          <div class="field">
+            <label for="curLeads">Leads Generated Per Event</label>
+            <input type="text" id="curLeads" inputmode="numeric" placeholder="e.g. 120" />
+          </div>
+
+          <div class="field full">
+            <label>Estimated Ad Spend Portion (Included in Current Fee)</label>
+            <div class="slider-wrap">
+              <div class="slider-top">
+                <div class="pill">Selected: <span id="curAdSelected">$2,500</span></div>
+              </div>
+              <input id="curAdSlider" type="range" min="500" max="2500" step="500" value="2500" />
+              <div class="slider-labels">
+                <span>$500</span><span>$1,500</span><span>$2,500</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="curAppts">Appointments Set Per Event (optional)</label>
+            <input type="text" id="curAppts" inputmode="numeric" placeholder="auto = 60% of leads" />
+            <div class="help">If blank, appointments = 60% of leads.</div>
+          </div>
+
+          <div class="field">
+            <label for="curClose">Closing Rate (%)</label>
+            <input type="text" id="curClose" inputmode="decimal" placeholder="e.g. 25" />
+            <div class="help">&nbsp;</div>
+          </div>
+
+          <div class="field">
+            <label for="curRuns">Events Per Year</label>
+            <input type="text" id="curRuns" inputmode="numeric" placeholder="1–12" value="12" />
+          </div>
+
+          <div class="field">
+            <label for="curDays">Days Per Event</label>
+            <input type="text" id="curDays" inputmode="numeric" placeholder="min 1" value="1" />
+          </div>
+        </div>
+      </div>
+
+      <!-- COLUMN 2 -->
+      <div class="card">
+        <h2>Secrets Facebook Hack Numbers</h2>
+        <div class="subhead">
+          Dealer budgets and uses dealer ad account. Johnson Advertising does not require ad dollars.
+        </div>
+
+        <div class="grid">
+          <div class="field">
+            <label for="jaRuns">Secrets Events Per Year</label>
+            <input type="text" id="jaRuns" inputmode="numeric" placeholder="1–12" value="12" />
+          </div>
+
+          <div class="field full">
+            <label>Dealer Ad Spend Per Event (Used for Secrets Projections)</label>
+            <div class="slider-wrap">
+              <div class="slider-top">
+                <div class="pill">Selected: <span id="jaAdSelected">$2,500</span></div>
+              </div>
+              <input id="jaAdSlider" type="range" min="500" max="5000" step="500" value="2500" />
+              <div class="slider-labels">
+                <span>$500</span><span>$2,500</span><span>$5,000</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="field full">
+            <label>Cost Per Lead Projection (Scenario)</label>
+            <div class="slider-wrap">
+              <div class="slider-top">
+                <div class="pill">Selected: <span id="cplSelected">$5.00</span></div>
+              </div>
+              <input id="cplSlider" type="range" min="0" max="2" step="1" value="1" />
+              <div class="slider-labels">
+                <span>$2.50</span><span>$5.00</span><span>$7.50</span>
+              </div>
+
+              <div class="help" style="margin-top:10px">
+                <strong>Fixed annual fees (always 12 months):</strong>
+                $9,000 licensing + $1,000/mo management + $250/mo graphics.
+                <br />
+                <strong>Variable:</strong> Dealer ad spend is multiplied by Secrets events selected during the 12-month span.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button type="button" id="btnCalc">Calculate 12-Month Impact</button>
+          <button type="button" class="btn-secondary" id="btnReset">Reset</button>
+        </div>
+
+        <div class="errors" id="errors" role="alert" aria-live="assertive"></div>
+      </div>
+
+      <!-- COLUMN 3 -->
+      <div class="card results">
+        <h2>Net Results</h2>
+        <div class="subhead">Calculated from your current event numbers and Secrets projections.</div>
+
+        <div class="result-box">
+          <h3>Current Performance</h3>
+          <div class="results-grid">
+            <div class="tile">
+              <div class="k">Cost Per Lead</div>
+              <div class="v" id="outCurCPL">—</div>
+            </div>
+            <div class="tile">
+              <div class="k">Appointment Ratio</div>
+              <div class="v" id="outCurApptRatio">—</div>
+            </div>
+            <div class="tile">
+              <div class="k">Cost Per Sold</div>
+              <div class="v" id="outCurCPS">—</div>
+            </div>
+            <div class="tile">
+              <div class="k">Cost Per Day</div>
+              <div class="v" id="outCurCPD">—</div>
+            </div>
+            <div class="tile" style="grid-column:1/-1">
+              <div class="k">Annual Spend</div>
+              <div class="v" id="outCurAnnual">—</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="result-box">
+          <h3>Secrets Facebook Hack™ Performance (Projected)</h3>
+          <div class="results-grid">
+            <div class="tile">
+              <div class="k">Cost Per Lead</div>
+              <div class="v" id="outJaCPL">—</div>
+            </div>
+            <div class="tile">
+              <div class="k">Cost Per Sold</div>
+              <div class="v" id="outJaCPS">—</div>
+            </div>
+            <div class="tile" style="grid-column:1/-1">
+              <div class="k">Annual Investment</div>
+              <div class="v" id="outJaAnnual">—</div>
+            </div>
+          </div>
+
+          <div class="assumptions" id="outAssumptions">—</div>
+        </div>
+
+        <div class="result-box">
+          <h3>12-Month Financial Impact</h3>
+          <div class="impact-line">
+            <span id="impactLabel">Annual Savings</span>
+            <span id="impactPct">—</span>
+          </div>
+          <div class="annual-savings" id="impactValue">—</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="cta-section">
+      <h2>Take Control of Your Advertising</h2>
+      <button type="button" onclick="window.open('https://calendly.com/troberts-johnsonads/secrets','_blank','noopener')">
+        Schedule Strategy Call
+      </button>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const SECRETS_ANNUAL_LICENSING = 9000;
+      const SECRETS_MGMT_MONTHLY = 1000;
+      const SECRETS_GRAPHICS_MONTHLY = 250;
+
+      const DEFAULT_APPT_RATIO = 0.60;
+      const CPL_OPTIONS = [2.5, 5.0, 7.5];
+
+      const els = {
+        curSpend: document.getElementById('curSpend'),
+        curLeads: document.getElementById('curLeads'),
+        curAppts: document.getElementById('curAppts'),
+        curClose: document.getElementById('curClose'),
+        curRuns: document.getElementById('curRuns'),
+        curDays: document.getElementById('curDays'),
+
+        curAdSlider: document.getElementById('curAdSlider'),
+        curAdSelected: document.getElementById('curAdSelected'),
+
+        jaRuns: document.getElementById('jaRuns'),
+        jaAdSlider: document.getElementById('jaAdSlider'),
+        jaAdSelected: document.getElementById('jaAdSelected'),
+
+        cplSlider: document.getElementById('cplSlider'),
+        cplSelected: document.getElementById('cplSelected'),
+
+        btnCalc: document.getElementById('btnCalc'),
+        btnReset: document.getElementById('btnReset'),
+        errors: document.getElementById('errors'),
+
+        outCurCPL: document.getElementById('outCurCPL'),
+        outCurApptRatio: document.getElementById('outCurApptRatio'),
+        outCurCPS: document.getElementById('outCurCPS'),
+        outCurCPD: document.getElementById('outCurCPD'),
+        outCurAnnual: document.getElementById('outCurAnnual'),
+
+        outJaCPL: document.getElementById('outJaCPL'),
+        outJaCPS: document.getElementById('outJaCPS'),
+        outJaAnnual: document.getElementById('outJaAnnual'),
+
+        impactLabel: document.getElementById('impactLabel'),
+        impactPct: document.getElementById('impactPct'),
+        impactValue: document.getElementById('impactValue'),
+
+        outAssumptions: document.getElementById('outAssumptions'),
+      };
+
+      function toNumber(raw) {
+        const s = String(raw ?? '').trim();
+        if (!s) return NaN;
+        const cleaned = s.replace(/[$,%\s,]/g, '');
+        const n = Number(cleaned);
+        return Number.isFinite(n) ? n : NaN;
+      }
+
+      function intOf(raw) {
+        const n = toNumber(raw);
+        if (!Number.isFinite(n)) return NaN;
+        return Math.trunc(n);
+      }
+
+      function safeDiv(a, b) {
+        if (!Number.isFinite(a) || !Number.isFinite(b) || b === 0) return NaN;
+        return a / b;
+      }
+
+      function money(n) {
+        if (!Number.isFinite(n)) return '—';
+        return n.toLocaleString(undefined, { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      }
+
+      function pct(n) {
+        if (!Number.isFinite(n)) return '—';
+        return `${n.toLocaleString(undefined, { minimumFractionDigits: 1, maximumFractionDigits: 1 })}%`;
+      }
+
+      function ratio(n) {
+        if (!Number.isFinite(n)) return '—';
+        return n.toLocaleString(undefined, { minimumFractionDigits: 3, maximumFractionDigits: 3 });
+      }
+
+      function selectedCpl() {
+        const idx = Math.max(0, Math.min(2, Math.trunc(toNumber(els.cplSlider.value))));
+        return CPL_OPTIONS[idx];
+      }
+
+      function escapeHtml(str) {
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+
+      function showErrors(messages) {
+        if (!messages.length) {
+          els.errors.style.display = 'none';
+          els.errors.innerHTML = '';
+          return;
+        }
+        els.errors.style.display = 'block';
+        els.errors.innerHTML = '<ul>' + messages.map(m => `<li>${escapeHtml(m)}</li>`).join('') + '</ul>';
+      }
+
+      function setCurOutputRed(on) {
+        [els.outCurCPL, els.outCurCPS, els.outCurCPD, els.outCurAnnual].forEach((el) => {
+          el.classList.toggle('output-red', !!on);
+        });
+      }
+
+      function clearOutputs() {
+        [
+          els.outCurCPL, els.outCurApptRatio, els.outCurCPS, els.outCurCPD, els.outCurAnnual,
+          els.outJaCPL, els.outJaCPS, els.outJaAnnual,
+          els.impactPct, els.impactValue
+        ].forEach(n => (n.textContent = '—'));
+        els.impactLabel.textContent = 'Annual Savings';
+        els.impactValue.classList.remove('good', 'bad');
+        els.outAssumptions.textContent = '—';
+        setCurOutputRed(false);
+      }
+
+      function annualSecretsInvestment(eventsPerYear, dealerAdSpendPerEvent) {
+        const fixed = SECRETS_ANNUAL_LICENSING + (SECRETS_MGMT_MONTHLY * 12) + (SECRETS_GRAPHICS_MONTHLY * 12);
+        return fixed + (eventsPerYear * dealerAdSpendPerEvent);
+      }
+
+      function readInputs() {
+        const curLeads = intOf(els.curLeads.value);
+        const curApptsRaw = String(els.curAppts.value ?? '').trim();
+        const curApptsUser = intOf(curApptsRaw);
+
+        const curAppts =
+          curApptsRaw === '' && Number.isFinite(curLeads) && curLeads > 0
+            ? Math.round(curLeads * DEFAULT_APPT_RATIO)
+            : curApptsUser;
+
+        return {
+          curFeePerEvent: toNumber(els.curSpend.value),
+          curLeads,
+          curAppts,
+          curApptsWasAuto: curApptsRaw === '',
+          curClose: toNumber(els.curClose.value),
+          curEventsPerYear: intOf(els.curRuns.value),
+          curDays: intOf(els.curDays.value),
+
+          curHiddenAdSpend: intOf(els.curAdSlider.value), // reference only
+
+          secretsEventsPerYear: intOf(els.jaRuns.value),
+          secretsDealerAdSpend: intOf(els.jaAdSlider.value),
+
+          cpl: selectedCpl(),
+        };
+      }
+
+      function validate(i) {
+        const errs = [];
+
+        if (!(i.curFeePerEvent > 0)) errs.push('Current Fee Per Event must be greater than 0.');
+        if (!(i.curLeads > 0)) errs.push('Leads Generated Per Event must be greater than 0.');
+        if (!(i.curAppts >= 0)) errs.push('Appointments Set Per Event must be 0 or greater.');
+        if (i.curAppts > i.curLeads) errs.push('Appointments Set Per Event cannot exceed Leads Generated Per Event.');
+        if (!(i.curClose >= 0 && i.curClose <= 100)) errs.push('Closing Rate must be between 0 and 100.');
+        if (!Number.isInteger(i.curEventsPerYear) || i.curEventsPerYear < 1 || i.curEventsPerYear > 12) errs.push('Events Per Year must be an integer between 1 and 12.');
+        if (!Number.isInteger(i.curDays) || i.curDays < 1) errs.push('Days Per Event must be an integer of at least 1.');
+
+        if (!Number.isInteger(i.secretsEventsPerYear) || i.secretsEventsPerYear < 1 || i.secretsEventsPerYear > 12) errs.push('Secrets Events Per Year must be an integer between 1 and 12.');
+        if (!Number.isInteger(i.secretsDealerAdSpend) || i.secretsDealerAdSpend < 500 || i.secretsDealerAdSpend > 5000) errs.push('Dealer Ad Spend must be between $500 and $5,000.');
+
+        if (!Number.isInteger(i.curHiddenAdSpend) || i.curHiddenAdSpend < 500 || i.curHiddenAdSpend > 2500) errs.push('Estimated ad spend portion must be between $500 and $2,500.');
+
+        const salesCur = i.curAppts * (i.curClose / 100);
+        if (!(salesCur > 0)) errs.push('Sales Per Event (current) is 0 (appointments or closing rate too low). Cost Per Sold cannot be calculated.');
+
+        const secretsAnnual = annualSecretsInvestment(i.secretsEventsPerYear, i.secretsDealerAdSpend);
+        if (!(secretsAnnual > 0)) errs.push('Secrets annual investment could not be computed.');
+
+        const projectedLeads = i.secretsDealerAdSpend / i.cpl;
+        if (!(projectedLeads > 0)) errs.push('Projected leads could not be computed from dealer ad spend and CPL.');
+
+        const apptRatioCur = safeDiv(i.curAppts, i.curLeads);
+        const projectedSales = (projectedLeads * apptRatioCur) * (i.curClose / 100);
+        if (!(projectedSales > 0)) errs.push('Projected sales is 0. Cost Per Sold cannot be calculated.');
+
+        return errs;
+      }
+
+      function syncSliderLabels() {
+        const curAd = intOf(els.curAdSlider.value);
+        const jaAd = intOf(els.jaAdSlider.value);
+        els.curAdSelected.textContent = money(curAd).replace('US', '').trim();
+        els.jaAdSelected.textContent = money(jaAd).replace('US', '').trim();
+        els.cplSelected.textContent = money(selectedCpl()).replace('US', '').trim();
+      }
+
+      function calculate() {
+        const i = readInputs();
+        const errs = validate(i);
+        if (errs.length) {
+          showErrors(errs);
+          clearOutputs();
+          return;
+        }
+        showErrors([]);
+
+        const curCPL = safeDiv(i.curFeePerEvent, i.curLeads);
+        const apptRatioCur = safeDiv(i.curAppts, i.curLeads);
+        const salesCur = i.curAppts * (i.curClose / 100);
+        const curCPS = safeDiv(i.curFeePerEvent, salesCur);
+        const curCPD = safeDiv(i.curFeePerEvent, i.curDays);
+        const curAnnual = i.curFeePerEvent * i.curEventsPerYear;
+
+        const secretsAnnual = annualSecretsInvestment(i.secretsEventsPerYear, i.secretsDealerAdSpend);
+        const secretsCostPerEventAvg = safeDiv(secretsAnnual, i.secretsEventsPerYear);
+
+        const projectedLeads = i.secretsDealerAdSpend / i.cpl;
+        const projectedAppts = projectedLeads * apptRatioCur;
+        const projectedSales = projectedAppts * (i.curClose / 100);
+
+        const secretsCPL = safeDiv(secretsCostPerEventAvg, projectedLeads);
+        const secretsCPS = safeDiv(secretsCostPerEventAvg, projectedSales);
+
+        const savings = curAnnual - secretsAnnual;
+        const improvement = safeDiv(savings, curAnnual) * 100;
+
+        els.outCurCPL.textContent = money(curCPL);
+        els.outCurApptRatio.textContent = ratio(apptRatioCur);
+        els.outCurCPS.textContent = money(curCPS);
+        els.outCurCPD.textContent = money(curCPD);
+        els.outCurAnnual.textContent = money(curAnnual);
+
+        els.outJaCPL.textContent = money(secretsCPL);
+        els.outJaCPS.textContent = money(secretsCPS);
+        els.outJaAnnual.textContent = money(secretsAnnual);
+
+        setCurOutputRed(true);
+
+        const isSavings = savings >= 0;
+        els.impactLabel.textContent = isSavings ? 'Annual Savings' : 'Additional Annual Investment';
+        els.impactPct.textContent = `Percentage Improvement: ${pct(improvement)}`;
+        els.impactValue.textContent = money(Math.abs(savings));
+        els.impactValue.classList.remove('good', 'bad');
+        els.impactValue.classList.add(isSavings ? 'good' : 'bad');
+
+        const fixedAnnual = SECRETS_ANNUAL_LICENSING + (SECRETS_MGMT_MONTHLY * 12) + (SECRETS_GRAPHICS_MONTHLY * 12);
+        const variableAnnual = i.secretsEventsPerYear * i.secretsDealerAdSpend;
+
+        const notes = [];
+        notes.push(`Current fee per event: ${money(i.curFeePerEvent)}.`);
+        notes.push(`Estimated ad spend portion (reference only): ${money(i.curHiddenAdSpend)}.`);
+        notes.push(`Secrets annual investment = fixed annual fees ${money(fixedAnnual)} + ad spend total (${i.secretsEventsPerYear} events × ${money(i.secretsDealerAdSpend)}) = ${money(variableAnnual)}.`);
+        notes.push(`Projected leads per event = ${money(i.secretsDealerAdSpend)} ÷ ${money(i.cpl)} ≈ ${Math.round(projectedLeads)}.`);
+        if (i.curApptsWasAuto) notes.push('Appointments auto-filled at 60% of leads because field was blank.');
+        els.outAssumptions.textContent = notes.join(' ');
+      }
+
+      function reset() {
+        ['curSpend','curLeads','curAppts','curClose'].forEach(id => (document.getElementById(id).value = ''));
+        els.curRuns.value = '12';
+        els.curDays.value = '1';
+        els.jaRuns.value = '12';
+
+        els.curAdSlider.value = '2500';
+        els.jaAdSlider.value = '2500';
+        els.cplSlider.value = '1';
+
+        syncSliderLabels();
+        showErrors([]);
+        clearOutputs();
+      }
+
+      els.btnCalc.addEventListener('click', calculate);
+      els.btnReset.addEventListener('click', reset);
+
+      els.curAdSlider.addEventListener('input', syncSliderLabels);
+      els.jaAdSlider.addEventListener('input', syncSliderLabels);
+      els.cplSlider.addEventListener('input', syncSliderLabels);
+
+      syncSliderLabels();
+      clearOutputs();
+    })();
+  </script>
 </body>
 </html>
