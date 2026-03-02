@@ -10,8 +10,19 @@
       name="description"
       content="Embed-ready Secrets Facebook Hack sales calculator to compare current campaign performance vs Johnson Advertising over 12 months."
     />
+
+    <script>
+      // Enables clean iframe embedding: add ?embed=1 to the URL.
+      (function () {
+        try {
+          const params = new URLSearchParams(location.search);
+          if (params.get("embed") === "1") document.documentElement.classList.add("embed-mode");
+        } catch (_) {}
+      })();
+    </script>
+
     <style>
-      /* Page shell for GitHub Pages preview (keeps your embed clean, centered, and professional) */
+      /* Page shell for GitHub Pages preview */
       :root {
         --page-bg: #0b1220;
         --page-ink: #e5e7eb;
@@ -98,9 +109,25 @@
         padding: 3px 6px;
       }
 
-      /* Make the embedded calculator blend well in the preview shell */
-      #ja-calculator.ja-wrap {
-        margin: 0;
+      /* Embed mode: hides preview chrome and makes the page iframe-friendly */
+      .embed-mode body {
+        background: #ffffff;
+        color: #0f172a;
+      }
+      .embed-mode .page {
+        max-width: none;
+        padding: 0;
+      }
+      .embed-mode .topbar,
+      .embed-mode .hint {
+        display: none !important;
+      }
+      .embed-mode .panel {
+        border: 0;
+        background: transparent;
+        border-radius: 0;
+        padding: 0;
+        box-shadow: none;
       }
     </style>
   </head>
@@ -116,16 +143,10 @@
       </header>
 
       <section class="panel" aria-label="Calculator panel">
-        <!-- ============================================================
-             PASTE YOUR EMBED CALCULATOR BELOW (full block)
-             - Keep IDs as-is
-             - No external libs
-             ============================================================ -->
-
         <div id="ja-calculator" class="ja-wrap" aria-label="Johnson Ads Sales Calculator">
           <div class="ja-header">
             <div class="ja-title">
-              <div class="ja-brand">Johnson Ads</div>
+              <div class="ja-brand">JOHNSON ADS</div>
               <h2>12-Month Program Comparison Calculator</h2>
               <p>Enter your current program metrics and compare against Johnson Advertising.</p>
             </div>
@@ -133,7 +154,6 @@
           </div>
 
           <div class="ja-grid">
-            <!-- Inputs -->
             <div class="ja-card">
               <div class="ja-card-hd">
                 <h3>Inputs</h3>
@@ -212,13 +232,9 @@
                       <div class="ja-slider-labels" aria-hidden="true">
                         <span>$2.50</span><span>$5.00</span><span>$7.50</span>
                       </div>
-                      <div class="ja-slider-pill">
-                        Selected: <strong id="jaCplSelected">$5.00</strong>
-                      </div>
+                      <div class="ja-slider-pill">Selected: <strong id="jaCplSelected">$5.00</strong></div>
                     </div>
-                    <div class="ja-help">
-                      Uses monthly ad spend (<strong>$2,500</strong>) ÷ selected CPL to project leads per month.
-                    </div>
+                    <div class="ja-help">Uses monthly ad spend (<strong>$2,500</strong>) ÷ selected CPL to project leads per month.</div>
                   </div>
 
                   <div class="ja-pricing-note" id="jaPricingNote" role="note" aria-live="polite"></div>
@@ -233,9 +249,7 @@
               <div id="jaErrors" class="ja-errors" role="alert" aria-live="assertive" hidden></div>
             </div>
 
-            <!-- Results -->
             <div class="ja-results">
-              <!-- Current Performance -->
               <div class="ja-card">
                 <div class="ja-card-hd">
                   <h3>Current Performance</h3>
@@ -266,7 +280,6 @@
                 </div>
               </div>
 
-              <!-- Johnson Ads Performance -->
               <div class="ja-card">
                 <div class="ja-card-hd">
                   <h3>Johnson Advertising Performance</h3>
@@ -289,7 +302,6 @@
                 </div>
               </div>
 
-              <!-- 12-Month Financial Impact -->
               <div class="ja-card ja-impact">
                 <div class="ja-card-hd">
                   <h3>12-Month Financial Impact</h3>
@@ -714,6 +726,77 @@
           #ja-calculator .ja-warn {
             color: var(--ja-warn);
           }
+
+          /* ============================================================
+             (a) HERO HEADER (bigger, more "hero-like", still responsive)
+             ============================================================ */
+          #ja-calculator .ja-header {
+            position: relative;
+            overflow: hidden;
+            padding: 26px 22px;
+          }
+          #ja-calculator .ja-header::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(900px 300px at 10% 20%, rgba(14, 165, 233, 0.22), transparent 60%),
+              radial-gradient(700px 280px at 80% 0%, rgba(16, 185, 129, 0.16), transparent 55%);
+            pointer-events: none;
+          }
+          #ja-calculator .ja-title {
+            position: relative;
+            z-index: 1;
+          }
+          #ja-calculator .ja-brand {
+            font-size: 12px;
+            letter-spacing: 0.26em;
+          }
+          #ja-calculator h2 {
+            font-size: 30px;
+            line-height: 1.08;
+            margin: 10px 0 10px;
+            font-weight: 950;
+          }
+          #ja-calculator .ja-header p {
+            font-size: 14px;
+            max-width: 64ch;
+          }
+          @media (max-width: 640px) {
+            #ja-calculator .ja-header {
+              padding: 18px 16px;
+            }
+            #ja-calculator h2 {
+              font-size: 22px;
+            }
+          }
+
+          /* ============================================================
+             Visibility Boost (higher contrast header + badge)
+             ============================================================ */
+          #ja-calculator .ja-header {
+            background: linear-gradient(180deg, #ffffff, #f8fafc);
+            border: 1px solid rgba(15, 23, 42, 0.14);
+            box-shadow: 0 12px 28px rgba(15, 23, 42, 0.1);
+          }
+          #ja-calculator .ja-brand {
+            color: #075985;
+            font-weight: 900;
+          }
+          #ja-calculator h2 {
+            color: #0f172a;
+          }
+          #ja-calculator .ja-header p {
+            color: #334155;
+            font-weight: 600;
+          }
+          #ja-calculator .ja-badge {
+            position: relative;
+            z-index: 1;
+            background: #0ea5e9;
+            color: #ffffff;
+            border: 1px solid rgba(2, 132, 199, 0.45);
+            box-shadow: 0 10px 22px rgba(14, 165, 233, 0.25);
+          }
         </style>
 
         <script>
@@ -848,9 +931,7 @@
               const recurring = JA_MGMT_FEE + JA_GRAPHICS + JA_AD_SPEND;
 
               const bits = [
-                `<strong>Johnson Advertising pricing:</strong> Month 1 = ${escapeHtml(fmtMoney(month1))}; Months 2+ = ${escapeHtml(
-                  fmtMoney(recurring)
-                )}`,
+                `<strong>Johnson Advertising pricing:</strong> Month 1 = ${escapeHtml(fmtMoney(month1))}; Months 2+ = ${escapeHtml(fmtMoney(recurring))}`,
                 `<strong>Ad spend used for lead projection:</strong> ${escapeHtml(fmtMoney(JA_AD_SPEND))}/month`,
                 `<strong>Selected CPL:</strong> ${escapeHtml(fmtMoney(cpl))} → <strong>Projected leads per month:</strong> ${
                   Number.isFinite(leads) ? Math.round(leads) : "—"
@@ -954,8 +1035,8 @@
                   1
                 )}%).`
               );
-              if (i.curApptsWasAuto) assumptionBits.push(`Appointments were auto-filled at 60% of leads for the current program because the field was left blank.`);
-              assumptionBits.push(`Johnson Advertising "cost per run" shown is an average of annual investment ÷ Johnson runs/year.`);
+              if (i.curApptsWasAuto) assumptionBits.push("Appointments were auto-filled at 60% of leads for the current program because the field was left blank.");
+              assumptionBits.push('Johnson Advertising "cost per run" shown is an average of annual investment ÷ Johnson runs/year.');
 
               return {
                 ok: true,
@@ -1082,14 +1163,13 @@
             renderPricingSummary();
           })();
         </script>
-
-        <!-- ============================================================
-             END EMBED CALCULATOR
-             ============================================================ -->
       </section>
 
       <div class="hint" aria-label="Preview hint">
-        <span>Tip: After committing, enable GitHub Pages: <code class="kbd">Settings</code> → <code class="kbd">Pages</code> → <code class="kbd">main / (root)</code></span>
+        <span
+          >Embed mode: add <code class="kbd">?embed=1</code> to the URL (example:
+          <code class="kbd">.../secrets-calculator/?embed=1</code>)</span
+        >
         <span>Share URL: <code class="kbd">https://Tit4nTwe4Kz.github.io/secrets-calculator/</code></span>
       </div>
     </main>
