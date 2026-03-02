@@ -8,20 +8,25 @@
 
   <style>
     :root{
-      /* Brand palette (from your materials) */
       --accent:#01B7FF;
       --dark1:#070D11;
       --dark2:#0F1920;
       --ink:#DBE1E4;
       --muted:#8FA3AD;
+
       --card:#121C23;
-      --card2:#0f1920;
       --line:rgba(219,225,228,.12);
       --radius:18px;
 
       --good:#1ED760;
       --bad:#ff4d4d;
-      --warn:#ffb020;
+
+      /* Inputs (requested): white boxes + black text */
+      --input-bg:#ffffff;
+      --input-text:#0b1220;
+      --input-border:rgba(15,23,42,.18);
+      --input-placeholder:rgba(15,23,42,.45);
+      --input-focus:rgba(1,183,255,.28);
     }
 
     *{box-sizing:border-box}
@@ -61,7 +66,7 @@
     }
     .header-inner{
       display:flex;
-      justify-content:space-between;
+      justify-content:flex-start;
       align-items:center;
       flex-wrap:wrap;
       gap:28px;
@@ -72,7 +77,7 @@
       display:flex;
       gap:22px;
       align-items:center;
-      max-width:820px;
+      max-width:920px;
     }
     .brand img{
       height:86px;
@@ -93,23 +98,12 @@
       font-size:15px;
       line-height:1.4;
     }
-    .badge{
-      background:var(--accent);
-      color:#000;
-      padding:12px 20px;
-      border-radius:999px;
-      font-weight:800;
-      box-shadow:0 10px 30px rgba(1,183,255,.50);
-      white-space:nowrap;
-    }
     .subline{
       margin:10px 0 0;
       color:rgba(219,225,228,.70);
       font-size:12px;
     }
     .subline strong{color:rgba(219,225,228,.90)}
-    .subline a{color:rgba(219,225,228,.90);text-decoration:none;border-bottom:1px dashed rgba(219,225,228,.35)}
-    .subline a:hover{border-bottom-color:rgba(219,225,228,.7)}
 
     /* Layout */
     .grid-2{
@@ -127,6 +121,7 @@
       border:1px solid rgba(255,255,255,.06);
       box-shadow:0 16px 50px rgba(0,0,0,.35);
     }
+    .card + .card{margin-top:16px}
     .card h2{
       margin:0;
       font-size:16px;
@@ -153,32 +148,55 @@
 
     label{display:grid;gap:6px}
     label span{font-size:12px;color:rgba(219,225,228,.75)}
+    .help{margin-top:2px;font-size:11px;color:rgba(219,225,228,.62)}
+    .divider{height:1px;background:rgba(255,255,255,.08);margin:16px 0}
+
+    /* ✅ Inputs: white boxes + black text (fixes missing “boxes”) */
+    input[type="text"]{
+      width:100%;
+      padding:12px 12px;
+      border-radius:12px;
+      border:1px solid var(--input-border);
+      background:var(--input-bg);
+      color:var(--input-text);
+      font-size:14px;
+      outline:none;
+      transition:box-shadow 140ms ease, border-color 140ms ease;
+    }
+    input[type="text"]::placeholder{color:var(--input-placeholder)}
+    input[type="text"]:focus{
+      border-color:rgba(1,183,255,.65);
+      box-shadow:0 0 0 4px var(--input-focus);
+    }
+
+    /* Currency/percent row wrapper: keeps same look as other inputs */
     .row{
-      display:flex;align-items:center;gap:8px;
-      border:1px solid rgba(255,255,255,.10);
-      background:var(--card2);
+      display:flex;
+      align-items:center;
+      gap:8px;
+      border:1px solid var(--input-border);
+      background:var(--input-bg);
       border-radius:12px;
       overflow:hidden;
+      transition:box-shadow 140ms ease, border-color 140ms ease;
+    }
+    .row:focus-within{
+      border-color:rgba(1,183,255,.65);
+      box-shadow:0 0 0 4px var(--input-focus);
     }
     .row .prefix,.row .suffix{
       padding:0 12px;
-      color:rgba(219,225,228,.65);
+      color:rgba(15,23,42,.55);
       font-size:13px;
       user-select:none;
       white-space:nowrap;
     }
-    input[type="text"], input[type="number"]{
-      width:100%;
-      padding:12px 12px;
+    .row input[type="text"]{
       border:0;
-      outline:none;
-      background:transparent;
-      color:#fff;
-      font-size:14px;
+      border-radius:0;
+      box-shadow:none;
+      padding:12px 12px;
     }
-
-    .help{margin-top:2px;font-size:11px;color:rgba(219,225,228,.62)}
-    .divider{height:1px;background:rgba(255,255,255,.08);margin:16px 0}
 
     .actions{display:flex;gap:10px;margin-top:14px}
     .btn{
@@ -200,7 +218,7 @@
     }
     .btn:active{transform:translateY(1px)}
 
-    /* CPL Slider */
+    /* CPL Slider (kept dark card style) */
     .slider{
       border:1px solid rgba(255,255,255,.10);
       background:rgba(15,25,32,.55);
@@ -294,8 +312,6 @@
     .good{color:var(--good)}
     .bad{color:var(--bad)}
     .note{margin-top:10px;font-size:11px;color:rgba(219,225,228,.65);line-height:1.35}
-
-    /* Small footer note inside calculator */
     .tiny{margin-top:10px;font-size:11px;color:rgba(219,225,228,.55)}
   </style>
 </head>
@@ -317,7 +333,7 @@
             </div>
           </div>
         </div>
-        <div class="badge">Max 12 Runs / Year</div>
+        <!-- UI badge removed; validation still enforces 1–12 -->
       </div>
     </div>
 
@@ -326,7 +342,7 @@
       <div class="card" aria-label="Inputs">
         <div style="display:flex;justify-content:space-between;gap:10px;align-items:baseline">
           <h2>Inputs</h2>
-          <div class="muted">Runs are capped at 12/year</div>
+          <div class="muted">Auto-calculates as you type</div>
         </div>
 
         <div class="section">
@@ -362,6 +378,7 @@
             <label>
               <span>Runs Per Year</span>
               <input id="curRuns" type="text" inputmode="numeric" placeholder="1–12" />
+              <div class="help">Enforced max 12 runs/year.</div>
             </label>
 
             <label>
@@ -379,6 +396,7 @@
             <label>
               <span>Runs Per Year</span>
               <input id="jaRuns" type="text" inputmode="numeric" placeholder="1–12" />
+              <div class="help">Enforced max 12 runs/year.</div>
             </label>
 
             <label style="grid-column:1/-1">
@@ -487,7 +505,6 @@
     (function () {
       const $ = (id) => document.getElementById(id);
 
-      // Program constants (as provided)
       const MONTH1_SETUP = 9000;
       const MGMT_FEE = 1000;
       const GRAPHICS = 250;
@@ -576,8 +593,8 @@
       }
 
       function annualInvestment(runsPerYear) {
-        const month1 = MONTH1_SETUP + MGMT_FEE + GRAPHICS + AD_SPEND;     // 12,750
-        const recurring = MGMT_FEE + GRAPHICS + AD_SPEND;                // 3,750
+        const month1 = MONTH1_SETUP + MGMT_FEE + GRAPHICS + AD_SPEND; // 12,750
+        const recurring = MGMT_FEE + GRAPHICS + AD_SPEND;            // 3,750
         if (!Number.isInteger(runsPerYear) || runsPerYear < 1) return NaN;
         return month1 + Math.max(0, runsPerYear - 1) * recurring;
       }
@@ -585,6 +602,15 @@
       function projectedLeadsPerRun(cpl) {
         if (!(cpl > 0)) return NaN;
         return AD_SPEND / cpl;
+      }
+
+      function escapeHtml(str) {
+        return String(str)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
       }
 
       function setErrors(list) {
@@ -595,15 +621,6 @@
         }
         els.errors.hidden = false;
         els.errors.innerHTML = "<ul>" + list.map((m) => `<li>${escapeHtml(m)}</li>`).join("") + "</ul>";
-      }
-
-      function escapeHtml(str) {
-        return String(str)
-          .replace(/&/g, "&amp;")
-          .replace(/</g, "&lt;")
-          .replace(/>/g, "&gt;")
-          .replace(/"/g, "&quot;")
-          .replace(/'/g, "&#039;");
       }
 
       function clearOutputs() {
@@ -627,7 +644,6 @@
         if (!(i.curClose >= 0 && i.curClose <= 100)) errs.push("Closing Rate must be between 0 and 100.");
         if (!Number.isInteger(i.curRuns) || i.curRuns < 1 || i.curRuns > 12) errs.push("Current Runs Per Year must be an integer between 1 and 12.");
         if (!Number.isInteger(i.curDays) || i.curDays < 1) errs.push("Days Per Run must be an integer of at least 1.");
-
         if (!Number.isInteger(i.jaRuns) || i.jaRuns < 1 || i.jaRuns > 12) errs.push("Program Runs Per Year must be an integer between 1 and 12.");
 
         const salesCur = i.curAppts * (i.curClose / 100);
@@ -681,7 +697,6 @@
           return;
         }
 
-        // Current program
         const curCPL = safeDiv(i.curSpend, i.curLeads);
         const apptRatioCur = safeDiv(i.curAppts, i.curLeads);
         const salesCur = i.curAppts * (i.curClose / 100);
@@ -689,7 +704,6 @@
         const curCPD = safeDiv(i.curSpend, i.curDays);
         const curAnnual = i.curSpend * i.curRuns;
 
-        // Program (Secrets FB Hack by Johnson Advertising)
         const jaAnnual = annualInvestment(i.jaRuns);
         const jaPerRunAvg = safeDiv(jaAnnual, i.jaRuns);
 
@@ -700,11 +714,9 @@
         const jaCPL = safeDiv(jaPerRunAvg, leadsJA);
         const jaCPS = safeDiv(jaPerRunAvg, salesJA);
 
-        // Impact
         const savings = curAnnual - jaAnnual;
         const improvement = safeDiv(savings, curAnnual) * 100;
 
-        // Outputs
         els.outCurCPL.textContent = money(curCPL);
         els.outCurApptRatio.textContent = ratio(apptRatioCur);
         els.outCurCPS.textContent = money(curCPS);
@@ -726,8 +738,9 @@
         notes.push(`Projected leads use ${money(AD_SPEND)}/mo ad spend ÷ selected CPL (${money(i.cpl)}).`);
         notes.push(`Appointments and sales are projected using your current appointment ratio (${(apptRatioCur * 100).toFixed(1)}%) and closing rate (${i.curClose.toFixed(1)}%).`);
         if (i.curApptsWasAuto) notes.push("Appointments were auto-filled at 60% of leads because the field was left blank.");
-        notes.push('Displayed program CPL/CPS use an average "per run" cost (annual investment ÷ runs/year).');
-        els.outAssumptions.textContent = notes.join(" ") + ` (Projected per run: ${Math.round(leadsJA)} leads, ${Math.round(apptsJA)} appts, ${salesJA.toFixed(2)} sales.)`;
+        notes.push('Displayed CPL/CPS use an average "per run" cost (annual investment ÷ runs/year).');
+        els.outAssumptions.textContent =
+          notes.join(" ") + ` (Projected per run: ${Math.round(leadsJA)} leads, ${Math.round(apptsJA)} appts, ${salesJA.toFixed(2)} sales.)`;
       }
 
       function reset() {
@@ -738,8 +751,18 @@
         setErrors([]);
       }
 
-      // Wire up
-      els.cplSlider.addEventListener("input", updateCplUI);
+      // Auto-calc (debounced)
+      let t = null;
+      function scheduleCalc() {
+        if (t) clearTimeout(t);
+        t = setTimeout(calculate, 200);
+      }
+
+      ["curSpend","curLeads","curAppts","curClose","curRuns","curDays","jaRuns"].forEach((id) => {
+        $(id).addEventListener("input", scheduleCalc);
+      });
+      els.cplSlider.addEventListener("input", () => { updateCplUI(); scheduleCalc(); });
+
       els.btnCalc.addEventListener("click", calculate);
       els.btnReset.addEventListener("click", reset);
 
@@ -753,6 +776,7 @@
       els.jaRuns.value = "12";
       updateCplUI();
       clearOutputs();
+      calculate();
     })();
   </script>
 </body>
