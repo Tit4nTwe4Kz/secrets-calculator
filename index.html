@@ -1,1177 +1,759 @@
-<!-- /index.html -->
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="color-scheme" content="light" />
-    <title>Secrets Calculator — Johnson Advertising Comparison</title>
-    <meta
-      name="description"
-      content="Embed-ready Secrets Facebook Hack sales calculator to compare current campaign performance vs Johnson Advertising over 12 months."
-    />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Secrets Facebook Hack™ — 12-Month Impact Calculator</title>
+  <meta name="description" content="Secrets Facebook Hack™ by Johnson Advertising — 12-month financial impact calculator." />
 
-    <script>
-      // Enables clean iframe embedding: add ?embed=1 to the URL.
-      (function () {
-        try {
-          const params = new URLSearchParams(location.search);
-          if (params.get("embed") === "1") document.documentElement.classList.add("embed-mode");
-        } catch (_) {}
-      })();
-    </script>
+  <style>
+    :root{
+      /* Brand palette (from your materials) */
+      --accent:#01B7FF;
+      --dark1:#070D11;
+      --dark2:#0F1920;
+      --ink:#DBE1E4;
+      --muted:#8FA3AD;
+      --card:#121C23;
+      --card2:#0f1920;
+      --line:rgba(219,225,228,.12);
+      --radius:18px;
 
-    <style>
-      /* Page shell for GitHub Pages preview */
-      :root {
-        --page-bg: #0b1220;
-        --page-ink: #e5e7eb;
-        --page-sub: rgba(229, 231, 235, 0.75);
-        --page-card: rgba(255, 255, 255, 0.06);
-        --page-line: rgba(255, 255, 255, 0.12);
-      }
-      * {
-        box-sizing: border-box;
-      }
-      html,
-      body {
-        height: 100%;
-      }
-      body {
-        margin: 0;
-        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji",
-          "Segoe UI Emoji";
-        background: radial-gradient(1200px 900px at 15% 10%, rgba(14, 165, 233, 0.22), transparent 60%),
-          radial-gradient(1000px 800px at 85% 15%, rgba(16, 185, 129, 0.18), transparent 55%),
-          linear-gradient(180deg, #060913, var(--page-bg));
-        color: var(--page-ink);
-      }
-      a {
-        color: inherit;
-      }
-      .page {
-        max-width: 1180px;
-        margin: 0 auto;
-        padding: 28px 16px 56px;
-      }
-      .topbar {
-        display: flex;
-        gap: 14px;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 14px;
-      }
-      .brand {
-        display: grid;
-        gap: 2px;
-      }
-      .brand b {
-        font-size: 14px;
-        letter-spacing: 0.2px;
-      }
-      .brand span {
-        font-size: 12px;
-        color: var(--page-sub);
-      }
-      .pill {
-        border: 1px solid var(--page-line);
-        background: var(--page-card);
-        padding: 8px 10px;
-        border-radius: 999px;
-        font-size: 12px;
-        color: var(--page-sub);
-        user-select: none;
-        white-space: nowrap;
-      }
-      .panel {
-        border: 1px solid var(--page-line);
-        background: rgba(255, 255, 255, 0.03);
-        border-radius: 18px;
-        padding: 14px;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
-      }
-      .hint {
-        margin-top: 12px;
-        font-size: 12px;
-        color: var(--page-sub);
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-      }
-      code.kbd {
-        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-        font-size: 11px;
-        border: 1px solid var(--page-line);
-        background: rgba(255, 255, 255, 0.06);
-        border-radius: 8px;
-        padding: 3px 6px;
-      }
+      --good:#1ED760;
+      --bad:#ff4d4d;
+      --warn:#ffb020;
+    }
 
-      /* Embed mode: hides preview chrome and makes the page iframe-friendly */
-      .embed-mode body {
-        background: #ffffff;
-        color: #0f172a;
-      }
-      .embed-mode .page {
-        max-width: none;
-        padding: 0;
-      }
-      .embed-mode .topbar,
-      .embed-mode .hint {
-        display: none !important;
-      }
-      .embed-mode .panel {
-        border: 0;
-        background: transparent;
-        border-radius: 0;
-        padding: 0;
-        box-shadow: none;
-      }
-    </style>
-  </head>
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(1200px 900px at 15% 10%, rgba(1,183,255,.15), transparent 60%),
+        radial-gradient(900px 700px at 85% 20%, rgba(83,127,144,.18), transparent 55%),
+        linear-gradient(180deg,#050607,var(--dark1));
+    }
 
-  <body>
-    <main class="page">
-      <header class="topbar" aria-label="Preview header">
+    .wrapper{max-width:1200px;margin:auto;padding:32px 16px 70px}
+
+    /* Header */
+    .header{
+      background:linear-gradient(135deg,var(--dark1),var(--dark2));
+      border-radius:var(--radius);
+      padding:54px 54px;
+      border:1px solid rgba(1,183,255,.25);
+      box-shadow:0 0 60px rgba(1,183,255,.15),0 30px 70px rgba(0,0,0,.6);
+      position:relative;
+      overflow:hidden;
+      margin-bottom:22px;
+    }
+    .header::before{
+      content:"";
+      position:absolute;
+      right:-220px;
+      top:-220px;
+      width:560px;
+      height:560px;
+      background:radial-gradient(circle,rgba(1,183,255,.25),transparent 70%);
+      pointer-events:none;
+    }
+    .header-inner{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:28px;
+      position:relative;
+      z-index:1;
+    }
+    .brand{
+      display:flex;
+      gap:22px;
+      align-items:center;
+      max-width:820px;
+    }
+    .brand img{
+      height:86px;
+      width:auto;
+      filter:drop-shadow(0 0 25px rgba(1,183,255,.40));
+    }
+    .brand h1{
+      margin:0;
+      color:#fff;
+      font-size:36px;
+      line-height:1.05;
+      letter-spacing:-.4px;
+      font-weight:850;
+    }
+    .brand p{
+      margin:10px 0 0;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.4;
+    }
+    .badge{
+      background:var(--accent);
+      color:#000;
+      padding:12px 20px;
+      border-radius:999px;
+      font-weight:800;
+      box-shadow:0 10px 30px rgba(1,183,255,.50);
+      white-space:nowrap;
+    }
+    .subline{
+      margin:10px 0 0;
+      color:rgba(219,225,228,.70);
+      font-size:12px;
+    }
+    .subline strong{color:rgba(219,225,228,.90)}
+    .subline a{color:rgba(219,225,228,.90);text-decoration:none;border-bottom:1px dashed rgba(219,225,228,.35)}
+    .subline a:hover{border-bottom-color:rgba(219,225,228,.7)}
+
+    /* Layout */
+    .grid-2{
+      display:grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap:16px;
+    }
+    @media (max-width:980px){ .grid-2{grid-template-columns:1fr} }
+
+    /* Cards */
+    .card{
+      background:rgba(18,28,35,.92);
+      border-radius:var(--radius);
+      padding:22px;
+      border:1px solid rgba(255,255,255,.06);
+      box-shadow:0 16px 50px rgba(0,0,0,.35);
+    }
+    .card h2{
+      margin:0;
+      font-size:16px;
+      letter-spacing:-.15px;
+      color:#fff;
+    }
+    .card .muted{color:rgba(219,225,228,.70);font-size:12px}
+
+    .section{margin-top:14px}
+    .section h3{
+      margin:0 0 10px;
+      font-size:13px;
+      color:rgba(219,225,228,.85);
+      letter-spacing:.2px;
+      text-transform:uppercase;
+    }
+
+    .form{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    @media (max-width:560px){ .form{grid-template-columns:1fr} }
+
+    label{display:grid;gap:6px}
+    label span{font-size:12px;color:rgba(219,225,228,.75)}
+    .row{
+      display:flex;align-items:center;gap:8px;
+      border:1px solid rgba(255,255,255,.10);
+      background:var(--card2);
+      border-radius:12px;
+      overflow:hidden;
+    }
+    .row .prefix,.row .suffix{
+      padding:0 12px;
+      color:rgba(219,225,228,.65);
+      font-size:13px;
+      user-select:none;
+      white-space:nowrap;
+    }
+    input[type="text"], input[type="number"]{
+      width:100%;
+      padding:12px 12px;
+      border:0;
+      outline:none;
+      background:transparent;
+      color:#fff;
+      font-size:14px;
+    }
+
+    .help{margin-top:2px;font-size:11px;color:rgba(219,225,228,.62)}
+    .divider{height:1px;background:rgba(255,255,255,.08);margin:16px 0}
+
+    .actions{display:flex;gap:10px;margin-top:14px}
+    .btn{
+      flex:1 1 auto;
+      border:0;
+      border-radius:12px;
+      padding:12px 14px;
+      font-weight:850;
+      cursor:pointer;
+      background:var(--accent);
+      color:#000;
+      box-shadow:0 10px 26px rgba(1,183,255,.35);
+    }
+    .btn.secondary{
+      background:transparent;
+      color:rgba(219,225,228,.9);
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow:none;
+    }
+    .btn:active{transform:translateY(1px)}
+
+    /* CPL Slider */
+    .slider{
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(15,25,32,.55);
+      border-radius:14px;
+      padding:12px 12px 10px;
+      display:grid;
+      gap:10px;
+    }
+    input[type="range"]{width:100%;accent-color:var(--accent)}
+    .slider-labels{
+      display:flex;
+      justify-content:space-between;
+      font-size:11px;
+      color:rgba(219,225,228,.70);
+      user-select:none;
+      margin-top:-6px;
+    }
+    .pill{
+      justify-self:start;
+      font-size:12px;
+      color:#000;
+      background:var(--accent);
+      padding:6px 10px;
+      border-radius:999px;
+      font-weight:850;
+    }
+
+    /* Errors */
+    .errors{
+      margin-top:14px;
+      border:1px solid rgba(255,77,77,.35);
+      background:rgba(255,77,77,.08);
+      border-radius:14px;
+      padding:10px 12px;
+      font-size:12px;
+      color:rgba(255,255,255,.92);
+    }
+    .errors ul{margin:0;padding-left:18px}
+    .errors li{margin:4px 0}
+
+    /* Results */
+    .results{
+      display:grid;
+      gap:16px;
+      align-content:start;
+    }
+    .metrics{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    @media (max-width:560px){ .metrics{grid-template-columns:1fr} }
+    .metric{
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(15,25,32,.55);
+      border-radius:14px;
+      padding:12px;
+      min-height:66px;
+      display:grid;
+      gap:6px;
+      align-content:center;
+    }
+    .metric .k{font-size:12px;color:rgba(219,225,228,.70)}
+    .metric .v{font-size:16px;font-weight:900;color:#fff;letter-spacing:-.2px}
+    .metric.wide{grid-column:1/-1}
+
+    .impact{
+      border:1px solid rgba(1,183,255,.25);
+      background:linear-gradient(180deg, rgba(1,183,255,.10), rgba(15,25,32,.55));
+      border-radius:16px;
+      padding:14px;
+      box-shadow:0 18px 50px rgba(0,0,0,.35);
+    }
+    .impact .label{font-size:12px;color:rgba(219,225,228,.75)}
+    .impact .value{
+      margin-top:6px;
+      font-size:32px;
+      font-weight:950;
+      letter-spacing:-.6px;
+    }
+    .impact .sub{
+      margin-top:8px;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      font-size:12px;
+      color:rgba(219,225,228,.72);
+      flex-wrap:wrap;
+    }
+    .impact .sub strong{color:#fff}
+    .good{color:var(--good)}
+    .bad{color:var(--bad)}
+    .note{margin-top:10px;font-size:11px;color:rgba(219,225,228,.65);line-height:1.35}
+
+    /* Small footer note inside calculator */
+    .tiny{margin-top:10px;font-size:11px;color:rgba(219,225,228,.55)}
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="header" role="banner" aria-label="Secrets Facebook Hack header">
+      <div class="header-inner">
         <div class="brand">
-          <b>Secrets Facebook Hack — Calculator Preview</b>
-          <span>GitHub Pages demo for sharing & testing</span>
-        </div>
-        <div class="pill">Public preview • No external libraries</div>
-      </header>
-
-      <section class="panel" aria-label="Calculator panel">
-        <div id="ja-calculator" class="ja-wrap" aria-label="Johnson Ads Sales Calculator">
-          <div class="ja-header">
-            <div class="ja-title">
-              <div class="ja-brand">JOHNSON ADS</div>
-              <h2>12-Month Program Comparison Calculator</h2>
-              <p>Enter your current program metrics and compare against Johnson Advertising.</p>
-            </div>
-            <div class="ja-badge" title="Max 1 run per month">Max 12 runs/year</div>
-          </div>
-
-          <div class="ja-grid">
-            <div class="ja-card">
-              <div class="ja-card-hd">
-                <h3>Inputs</h3>
-                <div class="ja-muted">All fields required (Appointments auto-fills if blank)</div>
-              </div>
-
-              <div class="ja-section">
-                <div class="ja-section-hd">
-                  <h4>Current Program</h4>
-                </div>
-
-                <div class="ja-form">
-                  <label class="ja-field">
-                    <span>Current Spend Per Run</span>
-                    <div class="ja-input-row">
-                      <span class="ja-prefix">$</span>
-                      <input id="curSpend" inputmode="decimal" type="text" placeholder="e.g., 2500" autocomplete="off" />
-                    </div>
-                  </label>
-
-                  <label class="ja-field">
-                    <span>Leads Generated Per Run</span>
-                    <input id="curLeads" inputmode="numeric" type="text" placeholder="e.g., 120" autocomplete="off" />
-                  </label>
-
-                  <label class="ja-field">
-                    <span>Appointments Set Per Run</span>
-                    <input
-                      id="curAppts"
-                      inputmode="numeric"
-                      type="text"
-                      placeholder="(optional) auto = 60% of leads"
-                      autocomplete="off"
-                    />
-                    <div class="ja-help">If blank, appointments auto-calculate as <strong>60%</strong> of leads.</div>
-                  </label>
-
-                  <label class="ja-field">
-                    <span>Closing Rate</span>
-                    <div class="ja-input-row">
-                      <input id="curCloseRate" inputmode="decimal" type="text" placeholder="e.g., 25" autocomplete="off" />
-                      <span class="ja-suffix">%</span>
-                    </div>
-                  </label>
-
-                  <label class="ja-field">
-                    <span>Number of Times Program Runs Per Year</span>
-                    <input id="curRuns" inputmode="numeric" type="text" placeholder="1–12" autocomplete="off" />
-                    <div class="ja-help">Constraint: maximum 12 runs/year (max 1 per month).</div>
-                  </label>
-
-                  <label class="ja-field">
-                    <span>Number of Days Each Run Lasts</span>
-                    <input id="curDays" inputmode="numeric" type="text" placeholder="min 1" autocomplete="off" />
-                  </label>
-                </div>
-              </div>
-
-              <div class="ja-divider"></div>
-
-              <div class="ja-section">
-                <div class="ja-section-hd">
-                  <h4>Johnson Advertising Program</h4>
-                </div>
-
-                <div class="ja-form">
-                  <label class="ja-field">
-                    <span>Number of Times Johnson Advertising Runs Per Year</span>
-                    <input id="jaRuns" inputmode="numeric" type="text" placeholder="1–12" autocomplete="off" />
-                  </label>
-
-                  <div class="ja-field ja-field-wide">
-                    <span>Johnson Advertising Cost Per Lead (for projections)</span>
-                    <div class="ja-slider-wrap" role="group" aria-label="Cost per lead options">
-                      <input id="jaCplSlider" type="range" min="0" max="2" step="1" value="1" aria-label="Cost per lead selector" />
-                      <div class="ja-slider-labels" aria-hidden="true">
-                        <span>$2.50</span><span>$5.00</span><span>$7.50</span>
-                      </div>
-                      <div class="ja-slider-pill">Selected: <strong id="jaCplSelected">$5.00</strong></div>
-                    </div>
-                    <div class="ja-help">Uses monthly ad spend (<strong>$2,500</strong>) ÷ selected CPL to project leads per month.</div>
-                  </div>
-
-                  <div class="ja-pricing-note" id="jaPricingNote" role="note" aria-live="polite"></div>
-                </div>
-              </div>
-
-              <div class="ja-actions">
-                <button id="btnCalc" class="ja-btn" type="button">Calculate</button>
-                <button id="btnReset" class="ja-btn ja-btn-ghost" type="button">Reset</button>
-              </div>
-
-              <div id="jaErrors" class="ja-errors" role="alert" aria-live="assertive" hidden></div>
-            </div>
-
-            <div class="ja-results">
-              <div class="ja-card">
-                <div class="ja-card-hd">
-                  <h3>Current Performance</h3>
-                  <div class="ja-muted">Per run & annual metrics</div>
-                </div>
-
-                <div class="ja-metrics">
-                  <div class="ja-metric">
-                    <div class="ja-k">Cost Per Lead</div>
-                    <div class="ja-v" id="outCurCPL">—</div>
-                  </div>
-                  <div class="ja-metric">
-                    <div class="ja-k">Appointment Ratio</div>
-                    <div class="ja-v" id="outCurApptRatio">—</div>
-                  </div>
-                  <div class="ja-metric">
-                    <div class="ja-k">Cost Per Sold</div>
-                    <div class="ja-v" id="outCurCPS">—</div>
-                  </div>
-                  <div class="ja-metric">
-                    <div class="ja-k">Cost Per Day</div>
-                    <div class="ja-v" id="outCurCPD">—</div>
-                  </div>
-                  <div class="ja-metric ja-metric-wide">
-                    <div class="ja-k">Annual Spend</div>
-                    <div class="ja-v" id="outCurAnnual">—</div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="ja-card">
-                <div class="ja-card-hd">
-                  <h3>Johnson Advertising Performance</h3>
-                  <div class="ja-muted">Projected performance based on inputs</div>
-                </div>
-
-                <div class="ja-metrics">
-                  <div class="ja-metric">
-                    <div class="ja-k">Cost Per Lead</div>
-                    <div class="ja-v" id="outJaCPL">—</div>
-                  </div>
-                  <div class="ja-metric">
-                    <div class="ja-k">Cost Per Sold</div>
-                    <div class="ja-v" id="outJaCPS">—</div>
-                  </div>
-                  <div class="ja-metric ja-metric-wide">
-                    <div class="ja-k">Annual Investment</div>
-                    <div class="ja-v" id="outJaAnnual">—</div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="ja-card ja-impact">
-                <div class="ja-card-hd">
-                  <h3>12-Month Financial Impact</h3>
-                  <div class="ja-muted">Savings vs. current program</div>
-                </div>
-
-                <div class="ja-impact-box" id="impactBox">
-                  <div class="ja-impact-label" id="outImpactLabel">Annual Savings</div>
-                  <div class="ja-impact-value" id="outSavings">—</div>
-                  <div class="ja-impact-sub">
-                    <span>Percentage Improvement</span>
-                    <strong id="outImprove">—</strong>
-                  </div>
-                </div>
-
-                <div class="ja-footnote" id="outAssumptions">—</div>
-              </div>
+          <img src="./SecretsFBHack.png" alt="Secrets Facebook Hack" />
+          <div>
+            <h1>12-Month Impact Calculator</h1>
+            <p>
+              Compare your <strong>current program</strong> against the
+              <strong>Secrets Facebook Hack™</strong> program by <strong>Johnson Advertising</strong>.
+            </p>
+            <div class="subline">
+              Secrets Facebook Hack™ is owned and operated by <strong>Johnson Advertising</strong>.
             </div>
           </div>
         </div>
-
-        <style>
-          /* Calculator styles (embed-ready) */
-          #ja-calculator.ja-wrap {
-            --ja-bg: #ffffff;
-            --ja-ink: #0f172a;
-            --ja-sub: #475569;
-            --ja-line: rgba(15, 23, 42, 0.1);
-            --ja-soft: rgba(15, 23, 42, 0.04);
-            --ja-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
-            --ja-radius: 14px;
-            --ja-focus: rgba(2, 132, 199, 0.35);
-            --ja-accent: #0ea5e9;
-            --ja-good: #16a34a;
-            --ja-warn: #b45309;
-            --ja-bad: #dc2626;
-
-            font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji",
-              "Segoe UI Emoji";
-            color: var(--ja-ink);
-            background: transparent;
-            line-height: 1.35;
-          }
-
-          #ja-calculator * {
-            box-sizing: border-box;
-          }
-
-          #ja-calculator .ja-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 16px;
-            margin-bottom: 14px;
-            padding: 16px 18px;
-            background: linear-gradient(180deg, rgba(14, 165, 233, 0.08), rgba(14, 165, 233, 0.02));
-            border: 1px solid var(--ja-line);
-            border-radius: var(--ja-radius);
-          }
-
-          #ja-calculator .ja-brand {
-            font-weight: 800;
-            letter-spacing: 0.2px;
-            color: #0b4a6f;
-            font-size: 13px;
-            text-transform: uppercase;
-          }
-
-          #ja-calculator h2 {
-            margin: 6px 0 6px;
-            font-size: 20px;
-            letter-spacing: -0.2px;
-          }
-
-          #ja-calculator p {
-            margin: 0;
-            color: var(--ja-sub);
-            font-size: 13px;
-          }
-
-          #ja-calculator .ja-badge {
-            flex: 0 0 auto;
-            font-size: 12px;
-            color: #0b4a6f;
-            background: rgba(14, 165, 233, 0.14);
-            border: 1px solid rgba(14, 165, 233, 0.25);
-            padding: 8px 10px;
-            border-radius: 999px;
-            font-weight: 700;
-            white-space: nowrap;
-          }
-
-          #ja-calculator .ja-grid {
-            display: grid;
-            grid-template-columns: 1.05fr 1fr;
-            gap: 14px;
-          }
-
-          @media (max-width: 980px) {
-            #ja-calculator .ja-grid {
-              grid-template-columns: 1fr;
-            }
-          }
-
-          #ja-calculator .ja-card {
-            background: var(--ja-bg);
-            border: 1px solid var(--ja-line);
-            border-radius: var(--ja-radius);
-            box-shadow: var(--ja-shadow);
-            padding: 16px;
-          }
-
-          #ja-calculator .ja-card-hd {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            gap: 12px;
-            margin-bottom: 12px;
-          }
-
-          #ja-calculator h3 {
-            margin: 0;
-            font-size: 16px;
-            letter-spacing: -0.15px;
-          }
-
-          #ja-calculator h4 {
-            margin: 0;
-            font-size: 13px;
-            color: var(--ja-ink);
-            letter-spacing: -0.1px;
-          }
-
-          #ja-calculator .ja-muted {
-            color: var(--ja-sub);
-            font-size: 12px;
-          }
-
-          #ja-calculator .ja-section {
-            margin-top: 10px;
-          }
-
-          #ja-calculator .ja-section-hd {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 10px;
-          }
-
-          #ja-calculator .ja-form {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px 12px;
-          }
-
-          @media (max-width: 540px) {
-            #ja-calculator .ja-form {
-              grid-template-columns: 1fr;
-            }
-          }
-
-          #ja-calculator .ja-field {
-            display: grid;
-            gap: 6px;
-          }
-
-          #ja-calculator .ja-field-wide {
-            grid-column: 1 / -1;
-          }
-
-          #ja-calculator .ja-field span {
-            font-size: 12px;
-            color: var(--ja-sub);
-          }
-
-          #ja-calculator input[type="text"],
-          #ja-calculator input[type="range"] {
-            width: 100%;
-          }
-
-          #ja-calculator input[type="text"] {
-            padding: 10px 12px;
-            border-radius: 10px;
-            border: 1px solid var(--ja-line);
-            background: rgba(255, 255, 255, 0.9);
-            color: var(--ja-ink);
-            outline: none;
-            transition: box-shadow 160ms ease, border-color 160ms ease;
-            font-size: 14px;
-          }
-
-          #ja-calculator input[type="text"]:focus {
-            border-color: rgba(14, 165, 233, 0.55);
-            box-shadow: 0 0 0 4px var(--ja-focus);
-          }
-
-          #ja-calculator .ja-input-row {
-            display: flex;
-            align-items: center;
-            border: 1px solid var(--ja-line);
-            border-radius: 10px;
-            overflow: hidden;
-            background: rgba(255, 255, 255, 0.9);
-            transition: box-shadow 160ms ease, border-color 160ms ease;
-          }
-
-          #ja-calculator .ja-input-row:focus-within {
-            border-color: rgba(14, 165, 233, 0.55);
-            box-shadow: 0 0 0 4px var(--ja-focus);
-          }
-
-          #ja-calculator .ja-input-row input {
-            border: 0;
-            border-radius: 0;
-            box-shadow: none;
-            padding: 10px 12px;
-          }
-
-          #ja-calculator .ja-prefix,
-          #ja-calculator .ja-suffix {
-            padding: 0 10px;
-            color: var(--ja-sub);
-            font-size: 13px;
-            user-select: none;
-            white-space: nowrap;
-          }
-
-          #ja-calculator .ja-help {
-            margin-top: -2px;
-            font-size: 11px;
-            color: var(--ja-sub);
-          }
-
-          #ja-calculator .ja-divider {
-            height: 1px;
-            background: var(--ja-line);
-            margin: 14px 0;
-          }
-
-          #ja-calculator .ja-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 14px;
-          }
-
-          #ja-calculator .ja-btn {
-            appearance: none;
-            border: 1px solid rgba(2, 132, 199, 0.35);
-            background: linear-gradient(180deg, rgba(14, 165, 233, 0.95), rgba(2, 132, 199, 0.95));
-            color: white;
-            border-radius: 12px;
-            padding: 10px 12px;
-            font-weight: 750;
-            font-size: 13px;
-            cursor: pointer;
-            transition: transform 120ms ease, filter 120ms ease;
-            flex: 1 1 auto;
-          }
-
-          #ja-calculator .ja-btn:hover {
-            filter: brightness(1.02);
-          }
-          #ja-calculator .ja-btn:active {
-            transform: translateY(1px);
-          }
-
-          #ja-calculator .ja-btn-ghost {
-            background: white;
-            color: var(--ja-ink);
-            border: 1px solid var(--ja-line);
-          }
-
-          #ja-calculator .ja-btn-ghost:hover {
-            background: var(--ja-soft);
-          }
-
-          #ja-calculator .ja-errors {
-            margin-top: 12px;
-            border: 1px solid rgba(220, 38, 38, 0.28);
-            background: rgba(220, 38, 38, 0.06);
-            color: #7f1d1d;
-            border-radius: 12px;
-            padding: 10px 12px;
-            font-size: 12px;
-          }
-
-          #ja-calculator .ja-errors ul {
-            margin: 0;
-            padding-left: 18px;
-          }
-          #ja-calculator .ja-errors li {
-            margin: 4px 0;
-          }
-
-          #ja-calculator .ja-results {
-            display: grid;
-            gap: 14px;
-            align-content: start;
-          }
-
-          #ja-calculator .ja-metrics {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px 12px;
-          }
-
-          #ja-calculator .ja-metric {
-            background: rgba(15, 23, 42, 0.03);
-            border: 1px solid var(--ja-line);
-            border-radius: 12px;
-            padding: 10px 12px;
-            min-height: 62px;
-            display: grid;
-            gap: 6px;
-            align-content: center;
-          }
-
-          #ja-calculator .ja-metric-wide {
-            grid-column: 1 / -1;
-          }
-
-          #ja-calculator .ja-k {
-            color: var(--ja-sub);
-            font-size: 12px;
-          }
-
-          #ja-calculator .ja-v {
-            font-size: 16px;
-            font-weight: 800;
-            letter-spacing: -0.2px;
-          }
-
-          #ja-calculator .ja-impact-box {
-            border-radius: 14px;
-            border: 1px solid var(--ja-line);
-            background: linear-gradient(180deg, rgba(15, 23, 42, 0.03), rgba(15, 23, 42, 0.02));
-            padding: 14px;
-          }
-
-          #ja-calculator .ja-impact-label {
-            color: var(--ja-sub);
-            font-size: 12px;
-            margin-bottom: 6px;
-          }
-
-          #ja-calculator .ja-impact-value {
-            font-size: 28px;
-            font-weight: 900;
-            letter-spacing: -0.6px;
-            margin-bottom: 8px;
-          }
-
-          #ja-calculator .ja-impact-sub {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            color: var(--ja-sub);
-            font-size: 12px;
-          }
-
-          #ja-calculator .ja-impact-sub strong {
-            color: var(--ja-ink);
-            font-size: 13px;
-            font-weight: 850;
-          }
-
-          #ja-calculator .ja-footnote {
-            margin-top: 10px;
-            color: var(--ja-sub);
-            font-size: 11px;
-          }
-
-          #ja-calculator .ja-pricing-note {
-            grid-column: 1 / -1;
-            font-size: 12px;
-            border: 1px dashed var(--ja-line);
-            border-radius: 12px;
-            padding: 10px 12px;
-            color: var(--ja-sub);
-            background: rgba(15, 23, 42, 0.02);
-          }
-
-          #ja-calculator .ja-slider-wrap {
-            border: 1px solid var(--ja-line);
-            border-radius: 12px;
-            padding: 10px 12px;
-            background: rgba(15, 23, 42, 0.02);
-            display: grid;
-            gap: 8px;
-          }
-
-          #ja-calculator input[type="range"] {
-            accent-color: var(--ja-accent);
-          }
-
-          #ja-calculator .ja-slider-labels {
-            display: flex;
-            justify-content: space-between;
-            color: var(--ja-sub);
-            font-size: 11px;
-            margin-top: -2px;
-            user-select: none;
-          }
-
-          #ja-calculator .ja-slider-pill {
-            justify-self: start;
-            font-size: 12px;
-            color: var(--ja-ink);
-            background: rgba(14, 165, 233, 0.1);
-            border: 1px solid rgba(14, 165, 233, 0.25);
-            padding: 6px 10px;
-            border-radius: 999px;
-          }
-
-          #ja-calculator .ja-good {
-            color: var(--ja-good);
-          }
-          #ja-calculator .ja-bad {
-            color: var(--ja-bad);
-          }
-          #ja-calculator .ja-warn {
-            color: var(--ja-warn);
-          }
-
-          /* ============================================================
-             (a) HERO HEADER (bigger, more "hero-like", still responsive)
-             ============================================================ */
-          #ja-calculator .ja-header {
-            position: relative;
-            overflow: hidden;
-            padding: 26px 22px;
-          }
-          #ja-calculator .ja-header::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(900px 300px at 10% 20%, rgba(14, 165, 233, 0.22), transparent 60%),
-              radial-gradient(700px 280px at 80% 0%, rgba(16, 185, 129, 0.16), transparent 55%);
-            pointer-events: none;
-          }
-          #ja-calculator .ja-title {
-            position: relative;
-            z-index: 1;
-          }
-          #ja-calculator .ja-brand {
-            font-size: 12px;
-            letter-spacing: 0.26em;
-          }
-          #ja-calculator h2 {
-            font-size: 30px;
-            line-height: 1.08;
-            margin: 10px 0 10px;
-            font-weight: 950;
-          }
-          #ja-calculator .ja-header p {
-            font-size: 14px;
-            max-width: 64ch;
-          }
-          @media (max-width: 640px) {
-            #ja-calculator .ja-header {
-              padding: 18px 16px;
-            }
-            #ja-calculator h2 {
-              font-size: 22px;
-            }
-          }
-
-          /* ============================================================
-             Visibility Boost (higher contrast header + badge)
-             ============================================================ */
-          #ja-calculator .ja-header {
-            background: linear-gradient(180deg, #ffffff, #f8fafc);
-            border: 1px solid rgba(15, 23, 42, 0.14);
-            box-shadow: 0 12px 28px rgba(15, 23, 42, 0.1);
-          }
-          #ja-calculator .ja-brand {
-            color: #075985;
-            font-weight: 900;
-          }
-          #ja-calculator h2 {
-            color: #0f172a;
-          }
-          #ja-calculator .ja-header p {
-            color: #334155;
-            font-weight: 600;
-          }
-          #ja-calculator .ja-badge {
-            position: relative;
-            z-index: 1;
-            background: #0ea5e9;
-            color: #ffffff;
-            border: 1px solid rgba(2, 132, 199, 0.45);
-            box-shadow: 0 10px 22px rgba(14, 165, 233, 0.25);
-          }
-        </style>
-
-        <script>
-          (function () {
-            const $ = (sel) => document.querySelector(sel);
-            const root = $("#ja-calculator");
-
-            const JA_MONTH1_BASE = 9000;
-            const JA_MGMT_FEE = 1000;
-            const JA_GRAPHICS = 250;
-            const JA_AD_SPEND = 2500;
-
-            const JA_CPL_OPTIONS = [2.5, 5.0, 7.5];
-            const DEFAULT_APPT_RATIO = 0.6;
-
-            const els = {
-              curSpend: $("#curSpend"),
-              curLeads: $("#curLeads"),
-              curAppts: $("#curAppts"),
-              curCloseRate: $("#curCloseRate"),
-              curRuns: $("#curRuns"),
-              curDays: $("#curDays"),
-              jaRuns: $("#jaRuns"),
-
-              jaCplSlider: $("#jaCplSlider"),
-              jaCplSelected: $("#jaCplSelected"),
-              pricingNote: $("#jaPricingNote"),
-
-              btnCalc: $("#btnCalc"),
-              btnReset: $("#btnReset"),
-              errors: $("#jaErrors"),
-
-              outCurCPL: $("#outCurCPL"),
-              outCurApptRatio: $("#outCurApptRatio"),
-              outCurCPS: $("#outCurCPS"),
-              outCurCPD: $("#outCurCPD"),
-              outCurAnnual: $("#outCurAnnual"),
-
-              outJaCPL: $("#outJaCPL"),
-              outJaCPS: $("#outJaCPS"),
-              outJaAnnual: $("#outJaAnnual"),
-
-              outImpactLabel: $("#outImpactLabel"),
-              outSavings: $("#outSavings"),
-              outImprove: $("#outImprove"),
-              outAssumptions: $("#outAssumptions"),
-            };
-
-            function toNumber(raw) {
-              if (raw == null) return NaN;
-              const s = String(raw).trim();
-              if (!s) return NaN;
-              const cleaned = s.replace(/[$,%\s,]/g, "");
-              const n = Number(cleaned);
-              return Number.isFinite(n) ? n : NaN;
-            }
-
-            function safeDiv(a, b) {
-              if (!Number.isFinite(a) || !Number.isFinite(b) || b === 0) return NaN;
-              return a / b;
-            }
-
-            function fmtMoney(n) {
-              if (!Number.isFinite(n)) return "—";
-              return n.toLocaleString(undefined, {
-                style: "currency",
-                currency: "USD",
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-              });
-            }
-
-            function fmtPct(n) {
-              if (!Number.isFinite(n)) return "—";
-              return `${n.toLocaleString(undefined, { minimumFractionDigits: 1, maximumFractionDigits: 1 })}%`;
-            }
-
-            function fmtRatio(n) {
-              if (!Number.isFinite(n)) return "—";
-              return n.toLocaleString(undefined, { minimumFractionDigits: 3, maximumFractionDigits: 3 });
-            }
-
-            function escapeHtml(str) {
-              return String(str)
-                .replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;")
-                .replace(/"/g, "&quot;")
-                .replace(/'/g, "&#039;");
-            }
-
-            function setErrors(list) {
-              if (!list.length) {
-                els.errors.hidden = true;
-                els.errors.innerHTML = "";
-                return;
-              }
-              els.errors.hidden = false;
-              els.errors.innerHTML = "<ul>" + list.map((m) => `<li>${escapeHtml(m)}</li>`).join("") + "</ul>";
-            }
-
-            function getSelectedJaCpl() {
-              const idx = Math.max(0, Math.min(2, Math.trunc(toNumber(els.jaCplSlider.value))));
-              return JA_CPL_OPTIONS[idx];
-            }
-
-            function updateCplUI() {
-              const cpl = getSelectedJaCpl();
-              els.jaCplSelected.textContent = fmtMoney(cpl).replace("$", "$");
-              renderPricingSummary();
-            }
-
-            function calcJaAnnualInvestment(jaRuns) {
-              const month1 = JA_MONTH1_BASE + JA_MGMT_FEE + JA_GRAPHICS + JA_AD_SPEND;
-              const recurring = JA_MGMT_FEE + JA_GRAPHICS + JA_AD_SPEND;
-              if (!Number.isInteger(jaRuns) || jaRuns < 1) return NaN;
-              return month1 + Math.max(0, jaRuns - 1) * recurring;
-            }
-
-            function projectedJaLeadsPerMonth(cpl) {
-              if (!(cpl > 0)) return NaN;
-              return JA_AD_SPEND / cpl;
-            }
-
-            function renderPricingSummary() {
-              const jaRuns = Math.trunc(toNumber(els.jaRuns.value));
-              const cpl = getSelectedJaCpl();
-              const leads = projectedJaLeadsPerMonth(cpl);
-              const annual = Number.isInteger(jaRuns) && jaRuns >= 1 ? calcJaAnnualInvestment(jaRuns) : NaN;
-
-              const month1 = JA_MONTH1_BASE + JA_MGMT_FEE + JA_GRAPHICS + JA_AD_SPEND;
-              const recurring = JA_MGMT_FEE + JA_GRAPHICS + JA_AD_SPEND;
-
-              const bits = [
-                `<strong>Johnson Advertising pricing:</strong> Month 1 = ${escapeHtml(fmtMoney(month1))}; Months 2+ = ${escapeHtml(fmtMoney(recurring))}`,
-                `<strong>Ad spend used for lead projection:</strong> ${escapeHtml(fmtMoney(JA_AD_SPEND))}/month`,
-                `<strong>Selected CPL:</strong> ${escapeHtml(fmtMoney(cpl))} → <strong>Projected leads per month:</strong> ${
-                  Number.isFinite(leads) ? Math.round(leads) : "—"
-                }`,
-              ];
-
-              if (Number.isFinite(annual)) {
-                bits.push(`<strong>Annual investment (for ${jaRuns} run(s)):</strong> ${escapeHtml(fmtMoney(annual))}`);
-              } else {
-                bits.push(`<strong>Annual investment:</strong> <span class="ja-muted">Enter Johnson runs per year (1–12) to compute.</span>`);
-              }
-
-              els.pricingNote.innerHTML = bits.join("<br/>");
-            }
-
-            function readInputs() {
-              const leads = Math.trunc(toNumber(els.curLeads.value));
-              const apptsRaw = els.curAppts.value.trim();
-              const apptsUser = Math.trunc(toNumber(apptsRaw));
-              const appts = apptsRaw === "" && Number.isFinite(leads) ? Math.round(leads * DEFAULT_APPT_RATIO) : apptsUser;
-
-              return {
-                curSpend: toNumber(els.curSpend.value),
-                curLeads: leads,
-                curAppts: appts,
-                curApptsWasAuto: apptsRaw === "",
-                curCloseRate: toNumber(els.curCloseRate.value),
-                curRuns: Math.trunc(toNumber(els.curRuns.value)),
-                curDays: Math.trunc(toNumber(els.curDays.value)),
-                jaRuns: Math.trunc(toNumber(els.jaRuns.value)),
-                jaCpl: getSelectedJaCpl(),
-              };
-            }
-
-            function validate(i) {
-              const errs = [];
-
-              if (!(i.curSpend > 0)) errs.push("Current Spend Per Run must be greater than 0.");
-              if (!(i.curLeads > 0)) errs.push("Leads Generated Per Run must be greater than 0.");
-
-              if (!(i.curAppts >= 0)) errs.push("Appointments Set Per Run must be 0 or greater.");
-              if (i.curAppts > i.curLeads) errs.push("Appointments Set Per Run cannot exceed Leads Generated Per Run.");
-
-              if (!(i.curCloseRate >= 0 && i.curCloseRate <= 100)) errs.push("Closing Rate must be between 0 and 100.");
-
-              if (!Number.isInteger(i.curRuns) || i.curRuns < 1 || i.curRuns > 12)
-                errs.push("Number of Times Program Runs Per Year must be an integer between 1 and 12.");
-              if (!Number.isInteger(i.curDays) || i.curDays < 1) errs.push("Number of Days Each Run Lasts must be an integer of at least 1.");
-
-              if (!Number.isInteger(i.jaRuns) || i.jaRuns < 1 || i.jaRuns > 12)
-                errs.push("Number of Times Johnson Advertising Runs Per Year must be an integer between 1 and 12.");
-
-              const salesPerRunCur = i.curAppts * (i.curCloseRate / 100);
-              if (!(salesPerRunCur > 0))
-                errs.push("Sales Per Run (current) is 0 (appointments or closing rate too low). Cost Per Sold cannot be calculated.");
-
-              const annualJa = calcJaAnnualInvestment(i.jaRuns);
-              if (!(annualJa > 0)) errs.push("Johnson Advertising annual investment could not be computed (check runs per year).");
-
-              const projLeads = projectedJaLeadsPerMonth(i.jaCpl);
-              if (!(projLeads > 0)) errs.push("Projected leads per month (Johnson Advertising) could not be computed.");
-
-              const apptRatio = safeDiv(i.curAppts, i.curLeads);
-              const projAppts = projLeads * apptRatio;
-              const projSales = projAppts * (i.curCloseRate / 100);
-              if (!(projSales > 0)) errs.push("Projected sales per run (Johnson Advertising) is 0. Cost Per Sold cannot be calculated.");
-
-              return errs;
-            }
-
-            function compute(i) {
-              const errors = validate(i);
-              if (errors.length) return { ok: false, errors };
-
-              const costPerLeadCur = safeDiv(i.curSpend, i.curLeads);
-              const apptRatio = safeDiv(i.curAppts, i.curLeads);
-              const salesPerRunCur = i.curAppts * (i.curCloseRate / 100);
-              const costPerSoldCur = safeDiv(i.curSpend, salesPerRunCur);
-              const costPerDayCur = safeDiv(i.curSpend, i.curDays);
-              const annualCurrentSpend = i.curSpend * i.curRuns;
-
-              const annualJaInvestment = calcJaAnnualInvestment(i.jaRuns);
-              const jaCostPerRunAvg = safeDiv(annualJaInvestment, i.jaRuns);
-
-              const projLeadsPerRun = projectedJaLeadsPerMonth(i.jaCpl);
-              const projApptsPerRun = projLeadsPerRun * apptRatio;
-              const projSalesPerRun = projApptsPerRun * (i.curCloseRate / 100);
-
-              const costPerLeadJa = safeDiv(jaCostPerRunAvg, projLeadsPerRun);
-              const costPerSoldJa = safeDiv(jaCostPerRunAvg, projSalesPerRun);
-
-              const savings = annualCurrentSpend - annualJaInvestment;
-              const improvementPct = safeDiv(savings, annualCurrentSpend) * 100;
-
-              const assumptionBits = [];
-              assumptionBits.push(
-                `Johnson Advertising projected leads use ${fmtMoney(JA_AD_SPEND)}/mo ad spend ÷ selected CPL (${fmtMoney(i.jaCpl)}).`
-              );
-              assumptionBits.push(
-                `Appointments and sales are projected using your appointment ratio (${(apptRatio * 100).toFixed(1)}%) and closing rate (${i.curCloseRate.toFixed(
-                  1
-                )}%).`
-              );
-              if (i.curApptsWasAuto) assumptionBits.push("Appointments were auto-filled at 60% of leads for the current program because the field was left blank.");
-              assumptionBits.push('Johnson Advertising "cost per run" shown is an average of annual investment ÷ Johnson runs/year.');
-
-              return {
-                ok: true,
-                results: {
-                  costPerLeadCur,
-                  apptRatio,
-                  costPerSoldCur,
-                  costPerDayCur,
-                  annualCurrentSpend,
-
-                  annualJaInvestment,
-                  costPerLeadJa,
-                  costPerSoldJa,
-
-                  savings,
-                  improvementPct,
-
-                  projLeadsPerRun,
-                  projApptsPerRun,
-                  projSalesPerRun,
-
-                  assumptions: assumptionBits.join(" "),
-                },
-              };
-            }
-
-            function writeOutputs(r) {
-              els.outCurCPL.textContent = fmtMoney(r.costPerLeadCur);
-              els.outCurApptRatio.textContent = fmtRatio(r.apptRatio);
-              els.outCurCPS.textContent = fmtMoney(r.costPerSoldCur);
-              els.outCurCPD.textContent = fmtMoney(r.costPerDayCur);
-              els.outCurAnnual.textContent = fmtMoney(r.annualCurrentSpend);
-
-              els.outJaCPL.textContent = fmtMoney(r.costPerLeadJa);
-              els.outJaCPS.textContent = fmtMoney(r.costPerSoldJa);
-              els.outJaAnnual.textContent = fmtMoney(r.annualJaInvestment);
-
-              const isSavings = r.savings >= 0;
-              els.outImpactLabel.textContent = isSavings ? "Annual Savings" : "Additional Annual Investment";
-              els.outSavings.textContent = fmtMoney(Math.abs(r.savings));
-              els.outImprove.textContent = Number.isFinite(r.improvementPct) ? fmtPct(r.improvementPct) : "—";
-
-              els.outSavings.classList.remove("ja-good", "ja-bad");
-              els.outSavings.classList.add(isSavings ? "ja-good" : "ja-bad");
-
-              els.outAssumptions.textContent =
-                r.assumptions +
-                ` (Projected per run: ${Math.round(r.projLeadsPerRun)} leads, ${Math.round(r.projApptsPerRun)} appts, ${r.projSalesPerRun.toFixed(
-                  2
-                )} sales.)`;
-            }
-
-            function clearOutputs() {
-              [
-                els.outCurCPL,
-                els.outCurApptRatio,
-                els.outCurCPS,
-                els.outCurCPD,
-                els.outCurAnnual,
-                els.outJaCPL,
-                els.outJaCPS,
-                els.outJaAnnual,
-                els.outSavings,
-                els.outImprove,
-              ].forEach((n) => (n.textContent = "—"));
-              els.outImpactLabel.textContent = "Annual Savings";
-              els.outSavings.classList.remove("ja-good", "ja-bad");
-              els.outAssumptions.textContent = "—";
-            }
-
-            function onCalculate() {
-              setErrors([]);
-              const inputs = readInputs();
-              const out = compute(inputs);
-
-              if (!out.ok) {
-                clearOutputs();
-                setErrors(out.errors);
-                return;
-              }
-
-              writeOutputs(out.results);
-              setErrors([]);
-            }
-
-            function onReset() {
-              [els.curSpend, els.curLeads, els.curAppts, els.curCloseRate, els.curRuns, els.curDays, els.jaRuns].forEach((el) => (el.value = ""));
-              els.jaCplSlider.value = "1";
-              updateCplUI();
-              clearOutputs();
-              setErrors([]);
-              renderPricingSummary();
-            }
-
-            const numericFields = [els.curSpend, els.curLeads, els.curAppts, els.curCloseRate, els.curRuns, els.curDays, els.jaRuns];
-            numericFields.forEach((el) => {
-              el.addEventListener("blur", () => {
-                const n = toNumber(el.value);
-                if (!Number.isFinite(n)) return;
-                const isInt = [els.curLeads, els.curAppts, els.curRuns, els.curDays, els.jaRuns].includes(el);
-                if (isInt) el.value = String(Math.max(0, Math.trunc(n)));
-                else el.value = String(n);
-              });
-            });
-
-            els.jaCplSlider.addEventListener("input", updateCplUI);
-            els.jaRuns.addEventListener("input", renderPricingSummary);
-
-            els.btnCalc.addEventListener("click", onCalculate);
-            els.btnReset.addEventListener("click", onReset);
-
-            root.addEventListener("keydown", (e) => {
-              if (e.key === "Enter") {
-                e.preventDefault();
-                onCalculate();
-              }
-            });
-
-            els.curRuns.value = els.curRuns.value || "12";
-            els.jaRuns.value = els.jaRuns.value || "12";
-            els.curDays.value = els.curDays.value || "1";
-
-            updateCplUI();
-            renderPricingSummary();
-          })();
-        </script>
-      </section>
-
-      <div class="hint" aria-label="Preview hint">
-        <span
-          >Embed mode: add <code class="kbd">?embed=1</code> to the URL (example:
-          <code class="kbd">.../secrets-calculator/?embed=1</code>)</span
-        >
-        <span>Share URL: <code class="kbd">https://Tit4nTwe4Kz.github.io/secrets-calculator/</code></span>
+        <div class="badge">Max 12 Runs / Year</div>
       </div>
-    </main>
-  </body>
+    </div>
+
+    <div class="grid-2" id="calcRoot">
+      <!-- Inputs -->
+      <div class="card" aria-label="Inputs">
+        <div style="display:flex;justify-content:space-between;gap:10px;align-items:baseline">
+          <h2>Inputs</h2>
+          <div class="muted">Runs are capped at 12/year</div>
+        </div>
+
+        <div class="section">
+          <h3>Current Program</h3>
+          <div class="form">
+            <label>
+              <span>Spend Per Run</span>
+              <div class="row">
+                <div class="prefix">$</div>
+                <input id="curSpend" type="text" inputmode="decimal" placeholder="e.g., 2500" />
+              </div>
+            </label>
+
+            <label>
+              <span>Leads Per Run</span>
+              <input id="curLeads" type="text" inputmode="numeric" placeholder="e.g., 120" />
+            </label>
+
+            <label>
+              <span>Appointments Per Run</span>
+              <input id="curAppts" type="text" inputmode="numeric" placeholder="(optional) auto = 60% of leads" />
+              <div class="help">If blank, appointments auto-calculate at <strong>60%</strong> of leads.</div>
+            </label>
+
+            <label>
+              <span>Closing Rate</span>
+              <div class="row">
+                <input id="curClose" type="text" inputmode="decimal" placeholder="e.g., 25" />
+                <div class="suffix">%</div>
+              </div>
+            </label>
+
+            <label>
+              <span>Runs Per Year</span>
+              <input id="curRuns" type="text" inputmode="numeric" placeholder="1–12" />
+            </label>
+
+            <label>
+              <span>Days Per Run</span>
+              <input id="curDays" type="text" inputmode="numeric" placeholder="min 1" />
+            </label>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="section">
+          <h3>Secrets Facebook Hack™ Program (Johnson Advertising)</h3>
+          <div class="form">
+            <label>
+              <span>Runs Per Year</span>
+              <input id="jaRuns" type="text" inputmode="numeric" placeholder="1–12" />
+            </label>
+
+            <label style="grid-column:1/-1">
+              <span>Cost Per Lead Scenario (for projections)</span>
+              <div class="slider" role="group" aria-label="Cost per lead options">
+                <input id="cplSlider" type="range" min="0" max="2" step="1" value="1" />
+                <div class="slider-labels" aria-hidden="true">
+                  <span>$2.50</span><span>$5.00</span><span>$7.50</span>
+                </div>
+                <div class="pill">Selected: <span id="cplSelected">$5.00</span></div>
+                <div class="help">
+                  Projection uses monthly ad spend (<strong>$2,500</strong>) ÷ selected CPL to estimate leads per run.
+                </div>
+              </div>
+            </label>
+
+            <div class="metric wide" id="pricingNote" style="grid-column:1/-1">
+              <div class="k">Program pricing</div>
+              <div class="v" style="font-size:13px;font-weight:800;color:rgba(219,225,228,.9)">
+                Month 1: $9,000 setup + $1,000 management + $250 graphics + $2,500 ad spend
+                <br />
+                Months 2+: $1,000 management + $250 graphics + $2,500 ad spend
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn" id="btnCalc" type="button">Calculate</button>
+          <button class="btn secondary" id="btnReset" type="button">Reset</button>
+        </div>
+
+        <div id="errors" class="errors" hidden></div>
+        <div class="tiny">Tip: Press Enter to calculate.</div>
+      </div>
+
+      <!-- Results -->
+      <div class="results" aria-label="Results">
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;gap:10px;align-items:baseline">
+            <h2>Current Performance</h2>
+            <div class="muted">Per run & annual</div>
+          </div>
+
+          <div class="metrics" style="margin-top:14px">
+            <div class="metric">
+              <div class="k">Cost Per Lead</div>
+              <div class="v" id="outCurCPL">—</div>
+            </div>
+            <div class="metric">
+              <div class="k">Appointment Ratio</div>
+              <div class="v" id="outCurApptRatio">—</div>
+            </div>
+            <div class="metric">
+              <div class="k">Cost Per Sold</div>
+              <div class="v" id="outCurCPS">—</div>
+            </div>
+            <div class="metric">
+              <div class="k">Cost Per Day</div>
+              <div class="v" id="outCurCPD">—</div>
+            </div>
+            <div class="metric wide">
+              <div class="k">Annual Spend</div>
+              <div class="v" id="outCurAnnual">—</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;gap:10px;align-items:baseline">
+            <h2>Secrets Facebook Hack™ Performance</h2>
+            <div class="muted">Projected</div>
+          </div>
+
+          <div class="metrics" style="margin-top:14px">
+            <div class="metric">
+              <div class="k">Cost Per Lead</div>
+              <div class="v" id="outJaCPL">—</div>
+            </div>
+            <div class="metric">
+              <div class="k">Cost Per Sold</div>
+              <div class="v" id="outJaCPS">—</div>
+            </div>
+            <div class="metric wide">
+              <div class="k">Annual Investment</div>
+              <div class="v" id="outJaAnnual">—</div>
+            </div>
+          </div>
+
+          <div class="note" id="outAssumptions">—</div>
+        </div>
+
+        <div class="impact">
+          <div class="label" id="outImpactLabel">Annual Savings</div>
+          <div class="value" id="outSavings">—</div>
+          <div class="sub">
+            <span>Percentage Improvement</span>
+            <strong id="outImprove">—</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const $ = (id) => document.getElementById(id);
+
+      // Program constants (as provided)
+      const MONTH1_SETUP = 9000;
+      const MGMT_FEE = 1000;
+      const GRAPHICS = 250;
+      const AD_SPEND = 2500;
+
+      const CPL_OPTIONS = [2.5, 5.0, 7.5];
+      const DEFAULT_APPT_RATIO = 0.60;
+
+      const els = {
+        curSpend: $("curSpend"),
+        curLeads: $("curLeads"),
+        curAppts: $("curAppts"),
+        curClose: $("curClose"),
+        curRuns: $("curRuns"),
+        curDays: $("curDays"),
+        jaRuns: $("jaRuns"),
+        cplSlider: $("cplSlider"),
+        cplSelected: $("cplSelected"),
+        errors: $("errors"),
+
+        outCurCPL: $("outCurCPL"),
+        outCurApptRatio: $("outCurApptRatio"),
+        outCurCPS: $("outCurCPS"),
+        outCurCPD: $("outCurCPD"),
+        outCurAnnual: $("outCurAnnual"),
+
+        outJaCPL: $("outJaCPL"),
+        outJaCPS: $("outJaCPS"),
+        outJaAnnual: $("outJaAnnual"),
+
+        outImpactLabel: $("outImpactLabel"),
+        outSavings: $("outSavings"),
+        outImprove: $("outImprove"),
+        outAssumptions: $("outAssumptions"),
+
+        btnCalc: $("btnCalc"),
+        btnReset: $("btnReset"),
+      };
+
+      function toNumber(raw) {
+        const s = String(raw ?? "").trim();
+        if (!s) return NaN;
+        const cleaned = s.replace(/[$,%\s,]/g, "");
+        const n = Number(cleaned);
+        return Number.isFinite(n) ? n : NaN;
+      }
+
+      function intOf(raw) {
+        const n = toNumber(raw);
+        if (!Number.isFinite(n)) return NaN;
+        return Math.trunc(n);
+      }
+
+      function safeDiv(a, b) {
+        if (!Number.isFinite(a) || !Number.isFinite(b) || b === 0) return NaN;
+        return a / b;
+      }
+
+      function money(n) {
+        if (!Number.isFinite(n)) return "—";
+        return n.toLocaleString(undefined, {
+          style: "currency",
+          currency: "USD",
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        });
+      }
+
+      function pct(n) {
+        if (!Number.isFinite(n)) return "—";
+        return `${n.toLocaleString(undefined, { minimumFractionDigits: 1, maximumFractionDigits: 1 })}%`;
+      }
+
+      function ratio(n) {
+        if (!Number.isFinite(n)) return "—";
+        return n.toLocaleString(undefined, { minimumFractionDigits: 3, maximumFractionDigits: 3 });
+      }
+
+      function selectedCpl() {
+        const idx = Math.max(0, Math.min(2, Math.trunc(toNumber(els.cplSlider.value))));
+        return CPL_OPTIONS[idx];
+      }
+
+      function updateCplUI() {
+        els.cplSelected.textContent = money(selectedCpl()).replace("US", "").trim();
+      }
+
+      function annualInvestment(runsPerYear) {
+        const month1 = MONTH1_SETUP + MGMT_FEE + GRAPHICS + AD_SPEND;     // 12,750
+        const recurring = MGMT_FEE + GRAPHICS + AD_SPEND;                // 3,750
+        if (!Number.isInteger(runsPerYear) || runsPerYear < 1) return NaN;
+        return month1 + Math.max(0, runsPerYear - 1) * recurring;
+      }
+
+      function projectedLeadsPerRun(cpl) {
+        if (!(cpl > 0)) return NaN;
+        return AD_SPEND / cpl;
+      }
+
+      function setErrors(list) {
+        if (!list.length) {
+          els.errors.hidden = true;
+          els.errors.innerHTML = "";
+          return;
+        }
+        els.errors.hidden = false;
+        els.errors.innerHTML = "<ul>" + list.map((m) => `<li>${escapeHtml(m)}</li>`).join("") + "</ul>";
+      }
+
+      function escapeHtml(str) {
+        return String(str)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+      }
+
+      function clearOutputs() {
+        [
+          els.outCurCPL, els.outCurApptRatio, els.outCurCPS, els.outCurCPD, els.outCurAnnual,
+          els.outJaCPL, els.outJaCPS, els.outJaAnnual,
+          els.outSavings, els.outImprove,
+        ].forEach((n) => (n.textContent = "—"));
+        els.outImpactLabel.textContent = "Annual Savings";
+        els.outSavings.classList.remove("good", "bad");
+        els.outAssumptions.textContent = "—";
+      }
+
+      function validate(i) {
+        const errs = [];
+
+        if (!(i.curSpend > 0)) errs.push("Spend Per Run must be greater than 0.");
+        if (!(i.curLeads > 0)) errs.push("Leads Per Run must be greater than 0.");
+        if (!(i.curAppts >= 0)) errs.push("Appointments Per Run must be 0 or greater.");
+        if (i.curAppts > i.curLeads) errs.push("Appointments Per Run cannot exceed Leads Per Run.");
+        if (!(i.curClose >= 0 && i.curClose <= 100)) errs.push("Closing Rate must be between 0 and 100.");
+        if (!Number.isInteger(i.curRuns) || i.curRuns < 1 || i.curRuns > 12) errs.push("Current Runs Per Year must be an integer between 1 and 12.");
+        if (!Number.isInteger(i.curDays) || i.curDays < 1) errs.push("Days Per Run must be an integer of at least 1.");
+
+        if (!Number.isInteger(i.jaRuns) || i.jaRuns < 1 || i.jaRuns > 12) errs.push("Program Runs Per Year must be an integer between 1 and 12.");
+
+        const salesCur = i.curAppts * (i.curClose / 100);
+        if (!(salesCur > 0)) errs.push("Sales Per Run (current) is 0 (appointments or closing rate too low). Cost Per Sold cannot be calculated.");
+
+        const annualJA = annualInvestment(i.jaRuns);
+        if (!(annualJA > 0)) errs.push("Annual investment could not be computed.");
+
+        const leadsJA = projectedLeadsPerRun(i.cpl);
+        if (!(leadsJA > 0)) errs.push("Projected leads could not be computed from ad spend and CPL.");
+
+        const apptRatioCur = safeDiv(i.curAppts, i.curLeads);
+        const apptsJA = leadsJA * apptRatioCur;
+        const salesJA = apptsJA * (i.curClose / 100);
+        if (!(salesJA > 0)) errs.push("Projected sales is 0. Cost Per Sold cannot be calculated.");
+
+        return errs;
+      }
+
+      function readInputs() {
+        const curLeads = intOf(els.curLeads.value);
+        const curApptsRaw = String(els.curAppts.value ?? "").trim();
+        const curApptsUser = intOf(curApptsRaw);
+
+        const appts =
+          curApptsRaw === "" && Number.isFinite(curLeads) && curLeads > 0
+            ? Math.round(curLeads * DEFAULT_APPT_RATIO)
+            : curApptsUser;
+
+        return {
+          curSpend: toNumber(els.curSpend.value),
+          curLeads,
+          curAppts: appts,
+          curApptsWasAuto: curApptsRaw === "",
+          curClose: toNumber(els.curClose.value),
+          curRuns: intOf(els.curRuns.value),
+          curDays: intOf(els.curDays.value),
+
+          jaRuns: intOf(els.jaRuns.value),
+          cpl: selectedCpl(),
+        };
+      }
+
+      function calculate() {
+        setErrors([]);
+        const i = readInputs();
+        const errs = validate(i);
+        if (errs.length) {
+          clearOutputs();
+          setErrors(errs);
+          return;
+        }
+
+        // Current program
+        const curCPL = safeDiv(i.curSpend, i.curLeads);
+        const apptRatioCur = safeDiv(i.curAppts, i.curLeads);
+        const salesCur = i.curAppts * (i.curClose / 100);
+        const curCPS = safeDiv(i.curSpend, salesCur);
+        const curCPD = safeDiv(i.curSpend, i.curDays);
+        const curAnnual = i.curSpend * i.curRuns;
+
+        // Program (Secrets FB Hack by Johnson Advertising)
+        const jaAnnual = annualInvestment(i.jaRuns);
+        const jaPerRunAvg = safeDiv(jaAnnual, i.jaRuns);
+
+        const leadsJA = projectedLeadsPerRun(i.cpl);
+        const apptsJA = leadsJA * apptRatioCur;
+        const salesJA = apptsJA * (i.curClose / 100);
+
+        const jaCPL = safeDiv(jaPerRunAvg, leadsJA);
+        const jaCPS = safeDiv(jaPerRunAvg, salesJA);
+
+        // Impact
+        const savings = curAnnual - jaAnnual;
+        const improvement = safeDiv(savings, curAnnual) * 100;
+
+        // Outputs
+        els.outCurCPL.textContent = money(curCPL);
+        els.outCurApptRatio.textContent = ratio(apptRatioCur);
+        els.outCurCPS.textContent = money(curCPS);
+        els.outCurCPD.textContent = money(curCPD);
+        els.outCurAnnual.textContent = money(curAnnual);
+
+        els.outJaCPL.textContent = money(jaCPL);
+        els.outJaCPS.textContent = money(jaCPS);
+        els.outJaAnnual.textContent = money(jaAnnual);
+
+        const isSavings = savings >= 0;
+        els.outImpactLabel.textContent = isSavings ? "Annual Savings" : "Additional Annual Investment";
+        els.outSavings.textContent = money(Math.abs(savings));
+        els.outSavings.classList.remove("good", "bad");
+        els.outSavings.classList.add(isSavings ? "good" : "bad");
+        els.outImprove.textContent = pct(improvement);
+
+        const notes = [];
+        notes.push(`Projected leads use ${money(AD_SPEND)}/mo ad spend ÷ selected CPL (${money(i.cpl)}).`);
+        notes.push(`Appointments and sales are projected using your current appointment ratio (${(apptRatioCur * 100).toFixed(1)}%) and closing rate (${i.curClose.toFixed(1)}%).`);
+        if (i.curApptsWasAuto) notes.push("Appointments were auto-filled at 60% of leads because the field was left blank.");
+        notes.push('Displayed program CPL/CPS use an average "per run" cost (annual investment ÷ runs/year).');
+        els.outAssumptions.textContent = notes.join(" ") + ` (Projected per run: ${Math.round(leadsJA)} leads, ${Math.round(apptsJA)} appts, ${salesJA.toFixed(2)} sales.)`;
+      }
+
+      function reset() {
+        ["curSpend","curLeads","curAppts","curClose","curRuns","curDays","jaRuns"].forEach((id) => ($(id).value = ""));
+        els.cplSlider.value = "1";
+        updateCplUI();
+        clearOutputs();
+        setErrors([]);
+      }
+
+      // Wire up
+      els.cplSlider.addEventListener("input", updateCplUI);
+      els.btnCalc.addEventListener("click", calculate);
+      els.btnReset.addEventListener("click", reset);
+
+      document.getElementById("calcRoot").addEventListener("keydown", (e) => {
+        if (e.key === "Enter") { e.preventDefault(); calculate(); }
+      });
+
+      // Defaults
+      els.curRuns.value = "12";
+      els.curDays.value = "1";
+      els.jaRuns.value = "12";
+      updateCplUI();
+      clearOutputs();
+    })();
+  </script>
+</body>
 </html>
