@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Secrets Facebook Hack™ Impact Calculator</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -16,10 +16,14 @@
       --dark-bg: #101421;
       --light-gray: #A09E9F;
       --success-green: #1BD760;
+
       --danger-red: #FF4D4D;
+      --output-red: #B20D00;
+
       --border: rgba(255,255,255,0.08);
-      --input-border: #333;
+      --input-border: rgba(15,23,42,0.18);
       --shadow: 0 16px 40px rgba(0,0,0,0.35);
+      --focus: 0 0 0 4px rgba(1,183,255,0.18);
     }
 
     * { box-sizing: border-box; }
@@ -127,7 +131,7 @@
     .field.full { grid-column: 1 / -1; }
 
     label {
-      font-weight: 700;
+      font-weight: 600;
       font-size: 13px;
       color: rgba(255,255,255,0.85);
     }
@@ -137,8 +141,8 @@
       padding: 14px;
       border-radius: 8px;
       border: 1px solid var(--input-border);
-      background-color: var(--white);         /* requested */
-      color: var(--black);                    /* requested */
+      background-color: var(--white);
+      color: var(--black);
       font-size: 16px;
       outline: none;
     }
@@ -147,7 +151,7 @@
 
     input:focus {
       border-color: var(--primary-blue);
-      box-shadow: 0 0 0 4px rgba(1,183,255,0.18);
+      box-shadow: var(--focus);
     }
 
     .help {
@@ -168,10 +172,10 @@
       border-top: 1px solid var(--border);
     }
 
-    /* Slider */
+    /* Premium Sliders */
     .slider-wrap {
       border: 1px solid var(--border);
-      border-radius: 10px;
+      border-radius: 12px;
       padding: 14px;
       background: rgba(255,255,255,0.03);
     }
@@ -182,6 +186,7 @@
       align-items: baseline;
       gap: 10px;
       margin-bottom: 10px;
+      flex-wrap: wrap;
     }
 
     .pill {
@@ -195,6 +200,7 @@
       font-weight: 800;
       font-size: 12px;
       white-space: nowrap;
+      box-shadow: 0 12px 28px rgba(1,183,255,0.25);
     }
 
     input[type="range"] {
@@ -218,7 +224,7 @@
       border: none;
       border-radius: 8px;
       color: var(--black);
-      font-weight: 800;
+      font-weight: 700;
       font-size: 16px;
       cursor: pointer;
       transition: 0.2s;
@@ -262,21 +268,6 @@
       text-transform: uppercase;
     }
 
-    .result-value {
-      font-size: 22px;
-      font-weight: 800;
-      margin-bottom: 10px;
-    }
-
-    .annual-savings {
-      font-size: 46px;
-      font-weight: 800;
-      margin: 6px 0 10px;
-    }
-
-    .annual-savings.good { color: var(--success-green); }
-    .annual-savings.bad { color: var(--danger-red); }
-
     .result-box {
       border-top: 1px solid var(--border);
       padding-top: 18px;
@@ -290,7 +281,6 @@
       margin-top: 10px;
     }
 
-    .results-grid .result-box { margin-top: 0; padding-top: 0; border-top: 0; }
     .results-grid .tile {
       border: 1px solid var(--border);
       border-radius: 10px;
@@ -311,6 +301,9 @@
       color: var(--white);
     }
 
+    /* ONLY these current outputs turn red after calculation */
+    .tile .v.output-red { color: var(--output-red); }
+
     .impact-line {
       display: flex;
       justify-content: space-between;
@@ -322,6 +315,15 @@
       font-size: 14px;
     }
     .impact-line strong { color: var(--white); }
+
+    .annual-savings {
+      font-size: 46px;
+      font-weight: 800;
+      margin: 6px 0 10px;
+    }
+
+    .annual-savings.good { color: var(--success-green); }
+    .annual-savings.bad { color: var(--danger-red); }
 
     .assumptions {
       margin-top: 16px;
@@ -360,7 +362,6 @@
 <body>
   <section class="hero">
     <div class="hero-inner">
-      <!-- Make sure SecretsFBHack.png is in the same folder as this HTML (repo root) -->
       <img class="logo" src="./SecretsFBHack.png" alt="Secrets Facebook Hack" />
       <h1>COMPARE YOUR CURRENT PROGRAM VS <span>SECRETS FACEBOOK HACK™</span></h1>
       <p>
@@ -384,13 +385,33 @@
         <div class="section-title">Current Program</div>
         <div class="grid">
           <div class="field">
-            <label for="curSpend">Current Spend Per Run ($)</label>
+            <label for="curSpend">Current Fee Per Run (excluding ad spend) ($)</label>
             <input type="text" id="curSpend" inputmode="decimal" placeholder="e.g. 2500" />
+            <div class="help">This is your non-ad fee per run (agency fee, vendor fee, management, etc.).</div>
           </div>
 
           <div class="field">
             <label for="curLeads">Leads Generated Per Run</label>
             <input type="text" id="curLeads" inputmode="numeric" placeholder="e.g. 120" />
+          </div>
+
+          <div class="field full">
+            <label>Current Program Ad Spend Per Run (Dealer Budget)</label>
+            <div class="slider-wrap">
+              <div class="slider-top">
+                <div class="help" style="margin:0;color:rgba(255,255,255,0.75)">
+                  Used ONLY for Current Performance calculations.
+                </div>
+                <div class="pill">Selected: <span id="curAdSelected">$2,500</span></div>
+              </div>
+              <input id="curAdSlider" type="range" min="500" max="2500" step="500" value="2500" />
+              <div class="slider-labels">
+                <span>$500</span><span>$1,500</span><span>$2,500</span>
+              </div>
+              <div class="help" style="margin-top:10px">
+                Dealer-controlled budget placeholder. This does not imply any requirement—it's simply used to estimate your current total spend per run.
+              </div>
+            </div>
           </div>
 
           <div class="field">
@@ -424,11 +445,32 @@
           </div>
 
           <div class="field full">
-            <label>Cost Per Lead Scenario (for projections)</label>
+            <label>Dealer Ad Spend Budget Per Run (Used for Secrets Projections)</label>
             <div class="slider-wrap">
               <div class="slider-top">
                 <div class="help" style="margin:0;color:rgba(255,255,255,0.75)">
-                  Uses monthly ad spend <strong>$2,500</strong> ÷ selected CPL.
+                  Dealer-controlled placeholder. Your ad account, your budget, your transparency.
+                </div>
+                <div class="pill">Selected: <span id="jaAdSelected">$2,500</span></div>
+              </div>
+              <input id="jaAdSlider" type="range" min="500" max="5000" step="500" value="2500" />
+              <div class="slider-labels">
+                <span>$500</span><span>$2,750</span><span>$5,000</span>
+              </div>
+              <div class="help" style="margin-top:10px">
+                <strong>IMPORTANT:</strong> Johnson Advertising in no way requires any ad dollars to be spent for our program.
+                The dealer sets the budget and uses the dealer’s own ad account for complete transparency and control.
+                This $500–$5,000 range is only a projection placeholder.
+              </div>
+            </div>
+          </div>
+
+          <div class="field full">
+            <label>Cost Per Lead Projection (Scenario)</label>
+            <div class="slider-wrap">
+              <div class="slider-top">
+                <div class="help" style="margin:0;color:rgba(255,255,255,0.75)">
+                  Projected leads = <strong>Dealer Ad Spend (per run)</strong> ÷ selected CPL (projection only).
                 </div>
                 <div class="pill">Selected: <span id="cplSelected">$5.00</span></div>
               </div>
@@ -436,9 +478,12 @@
               <div class="slider-labels">
                 <span>$2.50</span><span>$5.00</span><span>$7.50</span>
               </div>
+
               <div class="help" style="margin-top:10px">
-                Pricing: Month 1 = <strong>$9,000</strong> setup + <strong>$1,000</strong> management + <strong>$250</strong> graphics + <strong>$2,500</strong> ad spend.
-                Months 2+ = <strong>$1,000</strong> management + <strong>$250</strong> graphics + <strong>$2,500</strong> ad spend.
+                <strong>Program fixed annual fees (always for 12 months):</strong>
+                $9,000 annual licensing + $1,000/mo management + $250/mo graphics.
+                <br />
+                <strong>Variable:</strong> Dealer Ad Spend is multiplied by the number of runs selected during the 12-month span.
               </div>
             </div>
           </div>
@@ -455,7 +500,7 @@
       <!-- RESULTS CARD -->
       <div class="card results">
         <h2>Your Results</h2>
-        <div class="subhead">Costs & projections are based on your inputs and selected CPL scenario.</div>
+        <div class="subhead">Costs & projections are based on your inputs, dealer-selected budgets, and CPL scenario.</div>
 
         <div class="result-box">
           <h3>Current Performance</h3>
@@ -505,7 +550,7 @@
           <h3>12-Month Financial Impact</h3>
           <div class="impact-line">
             <span id="impactLabel">Annual Savings</span>
-            <span class="result-value" id="impactPct">—</span>
+            <span id="impactPct">—</span>
           </div>
           <div class="annual-savings" id="impactValue">—</div>
           <div class="assumptions" id="assumptions">—</div>
@@ -522,14 +567,13 @@
 
   <script>
     (function () {
-      // Constants (provided)
-      const MONTH1_SETUP = 9000;
-      const MGMT_FEE = 1000;
-      const GRAPHICS = 250;
-      const AD_SPEND = 2500;
+      // Fixed Secrets annual fees (always 12 months)
+      const SECRETS_ANNUAL_LICENSING = 9000;
+      const SECRETS_MGMT_MONTHLY = 1000;
+      const SECRETS_GRAPHICS_MONTHLY = 250;
 
-      const CPL_OPTIONS = [2.5, 5.0, 7.5];
       const DEFAULT_APPT_RATIO = 0.60;
+      const CPL_OPTIONS = [2.5, 5.0, 7.5];
 
       const els = {
         curSpend: document.getElementById('curSpend'),
@@ -539,7 +583,13 @@
         curRuns: document.getElementById('curRuns'),
         curDays: document.getElementById('curDays'),
 
+        curAdSlider: document.getElementById('curAdSlider'),
+        curAdSelected: document.getElementById('curAdSelected'),
+
         jaRuns: document.getElementById('jaRuns'),
+        jaAdSlider: document.getElementById('jaAdSlider'),
+        jaAdSelected: document.getElementById('jaAdSelected'),
+
         cplSlider: document.getElementById('cplSlider'),
         cplSelected: document.getElementById('cplSelected'),
 
@@ -602,20 +652,13 @@
         return CPL_OPTIONS[idx];
       }
 
-      function updateCplUI() {
-        els.cplSelected.textContent = money(selectedCpl()).replace('US', '').trim();
-      }
-
-      function annualInvestment(runsPerYear) {
-        const month1 = MONTH1_SETUP + MGMT_FEE + GRAPHICS + AD_SPEND; // 12,750
-        const recurring = MGMT_FEE + GRAPHICS + AD_SPEND;            // 3,750
-        if (!Number.isInteger(runsPerYear) || runsPerYear < 1) return NaN;
-        return month1 + Math.max(0, runsPerYear - 1) * recurring;
-      }
-
-      function projectedLeadsPerRun(cpl) {
-        if (!(cpl > 0)) return NaN;
-        return AD_SPEND / cpl;
+      function escapeHtml(str) {
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
       }
 
       function showErrors(messages) {
@@ -628,13 +671,10 @@
         els.errors.innerHTML = '<ul>' + messages.map(m => `<li>${escapeHtml(m)}</li>`).join('') + '</ul>';
       }
 
-      function escapeHtml(str) {
-        return String(str)
-          .replace(/&/g, '&amp;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/"/g, '&quot;')
-          .replace(/'/g, '&#039;');
+      function setCurOutputRed(on) {
+        [els.outCurCPL, els.outCurCPS, els.outCurCPD, els.outCurAnnual].forEach((el) => {
+          el.classList.toggle('output-red', !!on);
+        });
       }
 
       function clearOutputs() {
@@ -646,6 +686,14 @@
         els.impactLabel.textContent = 'Annual Savings';
         els.impactValue.classList.remove('good', 'bad');
         els.assumptions.textContent = '—';
+        setCurOutputRed(false);
+      }
+
+      function annualSecretsInvestment(jaRuns, dealerAdSpendPerRun) {
+        // ✅ Fixed (always 12 months): $9,000 licensing + $1,000/mo mgmt + $250/mo graphics
+        const fixed = SECRETS_ANNUAL_LICENSING + (SECRETS_MGMT_MONTHLY * 12) + (SECRETS_GRAPHICS_MONTHLY * 12);
+        // ✅ Variable: dealer ad spend per run × runs during 12-month span
+        return fixed + (jaRuns * dealerAdSpendPerRun);
       }
 
       function readInputs() {
@@ -659,7 +707,7 @@
             : curApptsUser;
 
         return {
-          curSpend: toNumber(els.curSpend.value),
+          curFeePerRun: toNumber(els.curSpend.value),
           curLeads,
           curAppts,
           curApptsWasAuto: curApptsRaw === '',
@@ -667,7 +715,11 @@
           curRuns: intOf(els.curRuns.value),
           curDays: intOf(els.curDays.value),
 
+          curAdSpend: intOf(els.curAdSlider.value),
+
           jaRuns: intOf(els.jaRuns.value),
+          jaAdSpend: intOf(els.jaAdSlider.value),
+
           cpl: selectedCpl(),
         };
       }
@@ -675,30 +727,44 @@
       function validate(i) {
         const errs = [];
 
-        if (!(i.curSpend > 0)) errs.push('Current Spend Per Run must be greater than 0.');
+        if (!(i.curFeePerRun >= 0)) errs.push('Current Fee Per Run must be 0 or greater.');
         if (!(i.curLeads > 0)) errs.push('Leads Generated Per Run must be greater than 0.');
         if (!(i.curAppts >= 0)) errs.push('Appointments Set Per Run must be 0 or greater.');
         if (i.curAppts > i.curLeads) errs.push('Appointments Set Per Run cannot exceed Leads Generated Per Run.');
         if (!(i.curClose >= 0 && i.curClose <= 100)) errs.push('Closing Rate must be between 0 and 100.');
         if (!Number.isInteger(i.curRuns) || i.curRuns < 1 || i.curRuns > 12) errs.push('Current Runs Per Year must be an integer between 1 and 12.');
         if (!Number.isInteger(i.curDays) || i.curDays < 1) errs.push('Days Per Run must be an integer of at least 1.');
+
         if (!Number.isInteger(i.jaRuns) || i.jaRuns < 1 || i.jaRuns > 12) errs.push('Program Runs Per Year must be an integer between 1 and 12.');
+
+        if (!Number.isInteger(i.curAdSpend) || i.curAdSpend < 500 || i.curAdSpend > 2500) errs.push('Current Ad Spend slider must be between $500 and $2,500.');
+        if (!Number.isInteger(i.jaAdSpend) || i.jaAdSpend < 500 || i.jaAdSpend > 5000) errs.push('Dealer Ad Spend slider must be between $500 and $5,000.');
+
+        const totalCurrentSpendPerRun = i.curFeePerRun + i.curAdSpend;
+        if (!(totalCurrentSpendPerRun > 0)) errs.push('Total current spend per run (fee + ad spend) must be greater than 0.');
 
         const salesCur = i.curAppts * (i.curClose / 100);
         if (!(salesCur > 0)) errs.push('Sales Per Run (current) is 0 (appointments or closing rate too low). Cost Per Sold cannot be calculated.');
 
-        const jaAnnual = annualInvestment(i.jaRuns);
-        if (!(jaAnnual > 0)) errs.push('Annual investment could not be computed.');
+        const secretsAnnual = annualSecretsInvestment(i.jaRuns, i.jaAdSpend);
+        if (!(secretsAnnual > 0)) errs.push('Secrets annual investment could not be computed.');
 
-        const leadsJA = projectedLeadsPerRun(i.cpl);
-        if (!(leadsJA > 0)) errs.push('Projected leads could not be computed from ad spend and CPL.');
+        const projectedLeads = i.jaAdSpend / i.cpl;
+        if (!(projectedLeads > 0)) errs.push('Projected leads could not be computed from dealer ad spend and CPL.');
 
         const apptRatioCur = safeDiv(i.curAppts, i.curLeads);
-        const apptsJA = leadsJA * apptRatioCur;
-        const salesJA = apptsJA * (i.curClose / 100);
-        if (!(salesJA > 0)) errs.push('Projected sales is 0. Cost Per Sold cannot be calculated.');
+        const projectedSales = (projectedLeads * apptRatioCur) * (i.curClose / 100);
+        if (!(projectedSales > 0)) errs.push('Projected sales is 0. Cost Per Sold cannot be calculated.');
 
         return errs;
+      }
+
+      function syncSliderLabels() {
+        const curAd = intOf(els.curAdSlider.value);
+        const jaAd = intOf(els.jaAdSlider.value);
+        els.curAdSelected.textContent = money(curAd).replace('US', '').trim();
+        els.jaAdSelected.textContent = money(jaAd).replace('US', '').trim();
+        els.cplSelected.textContent = money(selectedCpl()).replace('US', '').trim();
       }
 
       function calculate() {
@@ -711,39 +777,44 @@
         }
         showErrors([]);
 
+        const totalCurrentSpendPerRun = i.curFeePerRun + i.curAdSpend;
+
         // Current calculations
-        const curCPL = safeDiv(i.curSpend, i.curLeads);
+        const curCPL = safeDiv(totalCurrentSpendPerRun, i.curLeads);
         const apptRatioCur = safeDiv(i.curAppts, i.curLeads);
         const salesCur = i.curAppts * (i.curClose / 100);
-        const curCPS = safeDiv(i.curSpend, salesCur);
-        const curCPD = safeDiv(i.curSpend, i.curDays);
-        const curAnnual = i.curSpend * i.curRuns;
+        const curCPS = safeDiv(totalCurrentSpendPerRun, salesCur);
+        const curCPD = safeDiv(totalCurrentSpendPerRun, i.curDays);
+        const curAnnual = totalCurrentSpendPerRun * i.curRuns;
 
-        // Secrets FB Hack program
-        const jaAnnual = annualInvestment(i.jaRuns);
-        const jaPerRunAvg = safeDiv(jaAnnual, i.jaRuns);
+        // Secrets projections (dealer ad spend per run × runs)
+        const secretsAnnual = annualSecretsInvestment(i.jaRuns, i.jaAdSpend);
+        const secretsCostPerRunAvg = safeDiv(secretsAnnual, i.jaRuns);
 
-        const leadsJA = projectedLeadsPerRun(i.cpl);
-        const apptsJA = leadsJA * apptRatioCur;
-        const salesJA = apptsJA * (i.curClose / 100);
+        const projectedLeads = i.jaAdSpend / i.cpl;
+        const projectedAppts = projectedLeads * apptRatioCur;
+        const projectedSales = projectedAppts * (i.curClose / 100);
 
-        const jaCPL = safeDiv(jaPerRunAvg, leadsJA);
-        const jaCPS = safeDiv(jaPerRunAvg, salesJA);
+        const secretsCPL = safeDiv(secretsCostPerRunAvg, projectedLeads);
+        const secretsCPS = safeDiv(secretsCostPerRunAvg, projectedSales);
 
         // 12-month impact
-        const savings = curAnnual - jaAnnual;
+        const savings = curAnnual - secretsAnnual;
         const improvement = safeDiv(savings, curAnnual) * 100;
 
-        // Render
+        // Render outputs
         els.outCurCPL.textContent = money(curCPL);
         els.outCurApptRatio.textContent = ratio(apptRatioCur);
         els.outCurCPS.textContent = money(curCPS);
         els.outCurCPD.textContent = money(curCPD);
         els.outCurAnnual.textContent = money(curAnnual);
 
-        els.outJaCPL.textContent = money(jaCPL);
-        els.outJaCPS.textContent = money(jaCPS);
-        els.outJaAnnual.textContent = money(jaAnnual);
+        els.outJaCPL.textContent = money(secretsCPL);
+        els.outJaCPS.textContent = money(secretsCPS);
+        els.outJaAnnual.textContent = money(secretsAnnual);
+
+        // Only specified current outputs red after calculation
+        setCurOutputRed(true);
 
         const isSavings = savings >= 0;
         els.impactLabel.textContent = isSavings ? 'Annual Savings' : 'Additional Annual Investment';
@@ -752,12 +823,17 @@
         els.impactValue.classList.remove('good', 'bad');
         els.impactValue.classList.add(isSavings ? 'good' : 'bad');
 
+        const fixedAnnual = SECRETS_ANNUAL_LICENSING + (SECRETS_MGMT_MONTHLY * 12) + (SECRETS_GRAPHICS_MONTHLY * 12);
+        const variableAnnual = i.jaRuns * i.jaAdSpend;
+
         const notes = [];
-        notes.push(`Projected leads use $2,500/mo ad spend ÷ selected CPL (${money(i.cpl)}).`);
-        notes.push(`Appointments and sales are projected using your appointment ratio (${(apptRatioCur * 100).toFixed(1)}%) and closing rate (${i.curClose.toFixed(1)}%).`);
+        notes.push(`Current totals use fee per run + current dealer ad spend: ${money(i.curFeePerRun)} + ${money(i.curAdSpend)} = ${money(totalCurrentSpendPerRun)}.`);
+        notes.push(`Secrets annual investment = fixed annual fees ${money(fixedAnnual)} + ad spend total (${i.jaRuns} runs × ${money(i.jaAdSpend)}) = ${money(variableAnnual)}.`);
+        notes.push(`Johnson Advertising does not require ad dollars; the dealer sets budget and runs from the dealer’s own ad account.`);
+        notes.push(`Projected leads per run = dealer ad spend ${money(i.jaAdSpend)} ÷ CPL ${money(i.cpl)} = ${Math.round(projectedLeads)}.`);
+        notes.push(`Appointments and sales use your appointment ratio (${(apptRatioCur * 100).toFixed(1)}%) and closing rate (${i.curClose.toFixed(1)}%).`);
         if (i.curApptsWasAuto) notes.push('Appointments were auto-filled at 60% of leads because the field was left blank.');
-        notes.push('Displayed CPL/CPS use an average per-run cost (annual investment ÷ runs/year).');
-        notes.push(`Projection per run: ${Math.round(leadsJA)} leads, ${Math.round(apptsJA)} appts, ${salesJA.toFixed(2)} sales.`);
+        notes.push(`Projection per run: ${Math.round(projectedLeads)} leads, ${Math.round(projectedAppts)} appts, ${projectedSales.toFixed(2)} sales.`);
         els.assumptions.textContent = notes.join(' ');
       }
 
@@ -766,8 +842,12 @@
         els.curRuns.value = '12';
         els.curDays.value = '1';
         els.jaRuns.value = '12';
+
+        els.curAdSlider.value = '2500';
+        els.jaAdSlider.value = '2500';
         els.cplSlider.value = '1';
-        updateCplUI();
+
+        syncSliderLabels();
         showErrors([]);
         clearOutputs();
       }
@@ -775,15 +855,13 @@
       // Wire up
       els.btnCalc.addEventListener('click', calculate);
       els.btnReset.addEventListener('click', reset);
-      els.cplSlider.addEventListener('input', () => { updateCplUI(); });
 
-      // Optional: Press Enter to calculate
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') calculate();
-      });
+      els.curAdSlider.addEventListener('input', syncSliderLabels);
+      els.jaAdSlider.addEventListener('input', syncSliderLabels);
+      els.cplSlider.addEventListener('input', syncSliderLabels);
 
       // Init
-      updateCplUI();
+      syncSliderLabels();
       clearOutputs();
     })();
   </script>
