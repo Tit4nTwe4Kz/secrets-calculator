@@ -1,125 +1,272 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Secrets Facebook Hack™ Impact Calculator</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
 <style>
-:root{
---primary-blue:#01B7FF;
---accent-yellow:#FFC82D;
---dark-bg:#101421;
---white:#FFF;
---black:#000;
---success-green:#1BD760;
---danger-red:#FF4D4D;
---border:rgba(255,255,255,0.08);
+:root {
+  --primary-blue:#01B7FF;
+  --accent-yellow:#FFC82D;
+  --black:#000000;
+  --white:#FFFFFF;
+  --dark-bg:#101421;
+  --light-gray:#A09E9F;
+  --success-green:#1BD760;
+  --danger-red:#FF4D4D;
+  --output-red:#B20D00;
+  --border:rgba(255,255,255,0.08);
 }
 
 *{box-sizing:border-box}
-body{margin:0;font-family:'Montserrat',sans-serif;background:var(--dark-bg);color:#fff}
+
+body{
+  margin:0;
+  font-family:'Montserrat',sans-serif;
+  background:var(--dark-bg);
+  color:var(--white);
+}
 
 /* HERO */
 .hero{
-padding:70px 20px;
-text-align:center;
-background:linear-gradient(180deg,#000 0%,#101421 100%);
+  padding:70px 20px;
+  text-align:center;
+  background:linear-gradient(180deg,#000 0%,#101421 100%);
 }
-.hero h1{font-size:38px;font-weight:800;margin:0}
+
+.hero h1{
+  font-size:40px;
+  font-weight:800;
+  margin:0 0 10px;
+}
+
 .hero span{color:var(--accent-yellow)}
 
+.hero p{
+  color:var(--light-gray);
+  max-width:800px;
+  margin:auto;
+}
+
 /* LAYOUT */
-.wrapper{max-width:1200px;margin:-40px auto 80px;padding:0 20px}
-.calculator-container{display:grid;grid-template-columns:1fr 1fr;gap:30px}
-.card{background:#000;padding:40px;border-radius:12px;border:1px solid var(--border)}
+.wrapper{
+  max-width:1200px;
+  margin:-40px auto 80px;
+  padding:0 20px;
+}
 
-.card h2{color:var(--primary-blue);margin-top:0}
+.calculator-container{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:30px;
+}
 
-/* GRID */
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.card{
+  background:var(--black);
+  padding:40px;
+  border-radius:12px;
+  border:1px solid var(--border);
+}
+
+/* FORM */
+.card h2{
+  color:var(--primary-blue);
+  margin-top:0;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+
 .field{display:grid;gap:8px}
 .field.full{grid-column:1/-1}
 
 input[type="text"]{
-padding:14px;
-border-radius:8px;
-border:1px solid #ddd;
-font-size:16px;
+  padding:14px;
+  border-radius:8px;
+  border:1px solid #ddd;
+  font-size:16px;
+  background:#fff;
+  color:#000;
+  outline:none;
 }
 
-/* SLIDERS */
+.section-title{
+  margin:25px 0 10px;
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  color:var(--light-gray);
+}
+
+/* SLIDER */
+.range-container{position:relative}
 .range-container input[type="range"]{
--webkit-appearance:none;
-width:100%;
-height:6px;
-background:#2a2a2a;
-border-radius:4px;
+  -webkit-appearance:none;
+  width:100%;
+  height:6px;
+  background:#2a2a2a;
+  border-radius:4px;
 }
 .range-container input[type="range"]::-webkit-slider-thumb{
--webkit-appearance:none;
-width:18px;
-height:18px;
-border-radius:50%;
-background:#fff;
-border:3px solid var(--primary-blue);
-cursor:pointer;
+  -webkit-appearance:none;
+  width:18px;
+  height:18px;
+  border-radius:50%;
+  background:var(--white);
+  border:3px solid var(--primary-blue);
+  cursor:pointer;
 }
-
 .range-dots{
-display:flex;
-justify-content:space-between;
-font-size:11px;
-margin-top:8px;
-color:rgba(255,255,255,0.6);
+  display:flex;
+  justify-content:space-between;
+  font-size:11px;
+  margin-top:8px;
+  color:rgba(255,255,255,0.6);
 }
 
 .pill{
-display:inline-block;
-background:var(--primary-blue);
-color:#000;
-padding:6px 12px;
-border-radius:20px;
-font-weight:700;
-font-size:12px;
-margin-top:8px;
+  display:inline-block;
+  background:var(--primary-blue);
+  color:var(--black);
+  padding:6px 12px;
+  border-radius:20px;
+  font-weight:700;
+  font-size:12px;
+  margin-top:8px;
 }
 
 /* RESULTS */
+.results-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+
+.tile{
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:14px;
+}
+
+.tile .k{
+  font-size:12px;
+  color:var(--light-gray);
+}
+
+.tile .v{
+  font-size:18px;
+  font-weight:800;
+}
+
+.output-red{color:var(--output-red)}
+
 .impact-line{
-display:grid;
-grid-template-columns:1fr auto;
-margin-top:20px;
-font-size:14px;
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:center;
+  margin-top:10px;
+  font-size:14px;
 }
 
 .annual-savings{
-font-size:52px;
-font-weight:800;
-margin-top:10px;
+  font-size:52px;
+  font-weight:800;
+  margin-top:5px;
 }
 
 .good{color:var(--success-green)}
 .bad{color:var(--danger-red)}
 
 button{
-width:100%;
-padding:16px;
-background:var(--primary-blue);
-border:none;
-border-radius:8px;
-font-weight:700;
-cursor:pointer;
-margin-top:20px;
+  width:100%;
+  padding:16px;
+  background:var(--primary-blue);
+  border:none;
+  border-radius:8px;
+  font-weight:700;
+  cursor:pointer;
+  margin-top:15px;
 }
+
 button:hover{background:var(--accent-yellow)}
 
 @media(max-width:900px){
-.calculator-container{grid-template-columns:1fr}
-.grid{grid-template-columns:1fr}
+  .calculator-container{grid-template-columns:1fr}
+  .grid{grid-template-columns:1fr}
+  .results-grid{grid-template-columns:1fr}
+}
+
+/* ===== IMPACT LINE ALIGNMENT FIX ===== */
+.impact-line{
+  display:grid;
+  grid-template-columns: 1fr auto;
+  align-items:center;
+  gap:12px;
+  margin-top:10px;
+  font-size:14px;
+}
+#impactPct{
+  text-align:right;
+  white-space:nowrap;
+}
+
+/* ===== PREMIUM SLIDER TRACK ===== */
+.slider-wrap input[type="range"]{
+  -webkit-appearance:none;
+  appearance:none;
+  width:100%;
+  height:8px;
+  border-radius:999px;
+  background:#2b2f3a;
+  outline:none;
+}
+
+.slider-wrap input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  appearance:none;
+  width:18px;
+  height:18px;
+  border-radius:50%;
+  background:#ffffff;
+  border:3px solid var(--primary-blue);
+  cursor:pointer;
+  box-shadow:0 10px 18px rgba(1,183,255,0.25);
+}
+
+.slider-wrap input[type="range"]::-moz-range-thumb{
+  width:18px;
+  height:18px;
+  border-radius:50%;
+  background:#ffffff;
+  border:3px solid var(--primary-blue);
+  cursor:pointer;
+}
+
+/* ===== SLIDER DOT TICKS ===== */
+.slider-dots{
+  display:flex;
+  justify-content:space-between;
+  margin-top:8px;
+}
+.slider-dots i{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.25);
+  display:block;
+}
+.slider-dots i.major{
+  width:8px;
+  height:8px;
+  background:rgba(255,255,255,0.45);
 }
 </style>
 </head>
@@ -128,15 +275,17 @@ button:hover{background:var(--accent-yellow)}
 
 <section class="hero">
 <h1>COMPARE YOUR CURRENT PROGRAM VS <span>SECRETS FACEBOOK HACK™</span></h1>
+<p>12-Month Financial Impact Calculator</p>
 </section>
 
 <div class="wrapper">
 <div class="calculator-container">
 
-<!-- INPUT SIDE -->
+<!-- INPUT -->
 <div class="card">
-<h2>Current Program</h2>
+<h2>Enter Your Current Numbers</h2>
 
+<div class="section-title">Current Program</div>
 <div class="grid">
 <div class="field">
 <label>Fee Per Run ($)</label>
@@ -144,49 +293,113 @@ button:hover{background:var(--accent-yellow)}
 </div>
 
 <div class="field">
-<label>Runs Per Year</label>
-<input type="text" id="curRuns" value="12">
+<label>Leads Per Run</label>
+<input type="text" id="curLeads">
 </div>
 
 <div class="field full">
-<label>Ad Spend Per Run</label>
-<div class="range-container">
+<label>Current Ad Spend Per Run</label>
+<div class="range-container slider-wrap">
 <input id="curAdSlider" type="range" min="500" max="2500" step="500" value="2500">
-<div class="range-dots">
+<div class="range-dots slider-labels">
 <span>$500</span><span>$1500</span><span>$2500</span>
+</div>
+<div class="slider-dots" aria-hidden="true">
+  <i class="major"></i>
+  <i></i>
+  <i class="major"></i>
+  <i></i>
+  <i class="major"></i>
 </div>
 </div>
 <div class="pill">Selected: <span id="curAdSelected">$2,500</span></div>
 </div>
+
+<div class="field">
+<label>Appointments</label>
+<input type="text" id="curAppts">
 </div>
 
-<h2 style="margin-top:40px">Secrets Program</h2>
+<div class="field">
+<label>Closing Rate (%)</label>
+<input type="text" id="curClose">
+</div>
+
+<div class="field">
+<label>Runs Per Year</label>
+<input type="text" id="curRuns" value="12">
+</div>
+
+<div class="field">
+<label>Days Per Run</label>
+<input type="text" id="curDays" value="1">
+</div>
+</div>
+
+<div class="section-title">Secrets Program</div>
 
 <div class="field full">
 <label>Dealer Ad Spend Per Run</label>
-<div class="range-container">
+<div class="range-container slider-wrap">
 <input id="jaAdSlider" type="range" min="500" max="5000" step="500" value="2500">
-<div class="range-dots">
-<span>$500</span><span>$1500</span><span>$2500</span><span>$3500</span><span>$5000</span>
+<div class="range-dots slider-labels">
+<span>$500</span>
+<span>$2,500</span>
+<span>$5,000</span>
 </div>
+
+<div class="slider-dots" aria-hidden="true">
+  <i class="major"></i>
+  <i></i>
+  <i></i>
+  <i></i>
+  <i class="major"></i>
+  <i></i>
+  <i></i>
+  <i></i>
+  <i class="major"></i>
+</div>
+
 </div>
 <div class="pill">Selected: <span id="jaAdSelected">$2,500</span></div>
 </div>
 
-<button onclick="exportPDF()">Download Executive PDF</button>
+<div class="field full">
+<label>Cost Per Lead Projection (Scenario)</label>
+<div class="range-container slider-wrap">
+<input id="cplSlider" type="range" min="0" max="2" step="1" value="1">
+<div class="range-dots slider-labels">
+<span>$2.50</span><span>$5.00</span><span>$7.50</span>
+</div>
+</div>
+<div class="pill">Selected: <span id="cplSelected">$5.00</span></div>
+</div>
+
+<button onclick="calculate()">Calculate 12-Month Impact</button>
+<button onclick="exportPDF()">Download PDF Report</button>
 
 </div>
 
-<!-- RESULTS SIDE -->
+<!-- RESULTS -->
 <div class="card">
-<h2>12-Month Financial Impact</h2>
+<h2>Your Results</h2>
+
+<div class="results-grid">
+<div class="tile"><div class="k">Cost Per Lead</div><div class="v output-red" id="outCurCPL">—</div></div>
+<div class="tile"><div class="k">Cost Per Sold</div><div class="v output-red" id="outCurCPS">—</div></div>
+<div class="tile"><div class="k">Annual Spend</div><div class="v output-red" id="outCurAnnual">—</div></div>
+<div class="tile"><div class="k">Secrets Annual Investment</div><div class="v" id="outJaAnnual">—</div></div>
+</div>
 
 <div class="impact-line">
-<span>Annual Savings</span>
+<span id="impactLabel">Annual Savings</span>
 <span id="impactPct">—</span>
 </div>
-
 <div class="annual-savings" id="impactValue">—</div>
+
+<button type="button" id="btnPdf" class="btn-secondary" style="margin-top:16px;">
+  Download Branded Executive PDF
+</button>
 
 </div>
 
@@ -195,117 +408,166 @@ button:hover{background:var(--accent-yellow)}
 
 <script>
 function money(n){
-return n.toLocaleString(undefined,{style:'currency',currency:'USD'})
+return Number(n).toLocaleString(undefined,{style:'currency',currency:'USD'})
 }
 
-function animateMoney(el,value){
-if(!Number.isFinite(value)){el.textContent='—';return;}
-let start=0,end=value;
-let range=end-start;
-let increment=range/60;
-let current=start;
-let timer=setInterval(()=>{
-current+=increment;
+function animateValue(id,start,end,duration=1000){
+let range=end-start
+let current=start
+let increment=range/(duration/16)
+let obj=document.getElementById(id)
+let timer=setInterval(function(){
+current+=increment
 if((increment>0&&current>=end)||(increment<0&&current<=end)){
-current=end;clearInterval(timer);
+current=end
+clearInterval(timer)
 }
-el.textContent=money(Math.abs(current));
-},16);
+obj.textContent=money(Math.abs(current))
+},16)
 }
 
 function calculate(){
-let curSpend=parseFloat(document.getElementById("curSpend").value)||0;
-let curRuns=parseFloat(document.getElementById("curRuns").value)||1;
-let curAd=parseFloat(document.getElementById("curAdSlider").value)||0;
-let jaAd=parseFloat(document.getElementById("jaAdSlider").value)||0;
+let curSpend=parseFloat(document.getElementById('curSpend').value)||0
+let curLeads=parseFloat(document.getElementById('curLeads').value)||0
+let curAd=parseFloat(document.getElementById('curAdSlider').value)||0
+let curRuns=parseFloat(document.getElementById('curRuns').value)||1
 
-let fixed=9000+(1000*12)+(250*12);
+let jaAd=parseFloat(document.getElementById('jaAdSlider').value)||0
+let fixed=9000+(1000*12)+(250*12)
 
-let curAnnual=(curSpend+curAd)*curRuns;
-let secretsAnnual=fixed+(jaAd*curRuns);
+let curTotalPerRun=curSpend+curAd
+let curAnnual=curTotalPerRun*curRuns
+let secretsAnnual=fixed+(jaAd*curRuns)
 
-let savings=curAnnual-secretsAnnual;
-let improvement=(savings/curAnnual)*100;
+let savings=curAnnual-secretsAnnual
+let improvement=(savings/curAnnual)*100
 
-animateMoney(document.getElementById("impactValue"),Math.abs(savings));
+animateValue("outCurAnnual",0,curAnnual)
+animateValue("outJaAnnual",0,secretsAnnual)
 
-document.getElementById("impactPct").textContent=
-isFinite(improvement)?"Improvement: "+improvement.toFixed(1)+"%":"—";
+document.getElementById("impactPct").textContent="Percentage Improvement: "+improvement.toFixed(1)+"%"
 
-let el=document.getElementById("impactValue");
-el.classList.remove("good","bad");
-el.classList.add(savings>=0?"good":"bad");
+let impact=document.getElementById("impactValue")
+impact.classList.remove("good","bad")
+
+if(savings>=0){
+animateValue("impactValue",0,savings)
+impact.classList.add("good")
+}else{
+animateValue("impactValue",0,Math.abs(savings))
+impact.classList.add("bad")
+}
 }
 
-["curSpend","curRuns","curAdSlider","jaAdSlider"].forEach(id=>{
-document.getElementById(id).addEventListener("input",calculate);
-});
+function exportPDF(){
+const element=document.querySelector(".wrapper")
+html2pdf().from(element).save("Secrets-Financial-Impact.pdf")
+}
 
 document.getElementById("curAdSlider").addEventListener("input",e=>{
-document.getElementById("curAdSelected").textContent=money(e.target.value);
-});
+document.getElementById("curAdSelected").textContent=money(e.target.value)
+})
 document.getElementById("jaAdSlider").addEventListener("input",e=>{
-document.getElementById("jaAdSelected").textContent=money(e.target.value);
-});
+document.getElementById("jaAdSelected").textContent=money(e.target.value)
+})
 
-/* PDF WITH FAINT REPEATING WATERMARK */
-function exportPDF(){
+/* ===== BRANDED PDF EXPORT WITH WATERMARK ===== */
 
-const watermark="./JAFavicon.png";
-const secretsLogo="./SecretsFBHack.png";
-const johnsonLogo="./JohnsonAds-LOGOFINAL.jpeg";
+function exportBrandedPDF() {
 
-let watermarkLayer="";
-for(let i=0;i<30;i++){
-watermarkLayer+=`<img src="${watermark}" style="width:120px;opacity:0.05;transform:rotate(-30deg);margin:60px;">`;
+  const secretsLogo = './SecretsFBHack.png';
+  const johnsonLogo = './JohnsonAds-LOGOFINAL.jpeg';
+  const watermarkLogo = './JAFavicon.png';
+
+  let watermarkLayer = "";
+  for(let i=0;i<28;i++){
+    watermarkLayer += `
+      <img src="${watermarkLogo}"
+           style="
+             width:120px;
+             opacity:0.05;
+             transform:rotate(-30deg);
+             margin:60px;
+           ">
+    `;
+  }
+
+  const isGood = document.getElementById("impactValue").classList.contains('good');
+
+  const pdfHTML = `
+  <div style="position:relative;font-family:Montserrat;padding:60px;background:#ffffff;min-height:1000px;overflow:hidden;">
+
+    <div style="
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      align-items:center;
+      z-index:0;">
+      ${watermarkLayer}
+    </div>
+
+    <div style="position:relative;z-index:2;color:#000;">
+
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <img src="${secretsLogo}" style="height:60px;">
+        <img src="${johnsonLogo}" style="height:50px;">
+      </div>
+
+      <h1 style="margin-top:50px;font-size:28px;">
+        12-Month Financial Impact Report
+      </h1>
+
+      <hr style="margin:30px 0;">
+
+      <h2>Executive Summary</h2>
+
+      <div style="
+        font-size:42px;
+        font-weight:800;
+        margin-top:15px;
+        color:${isGood ? '#1BD760' : '#FF4D4D'};
+      ">
+        ${document.getElementById("impactValue").textContent}
+      </div>
+
+      <div style="margin-top:10px;font-size:16px;">
+        ${document.getElementById("impactPct").textContent}
+      </div>
+
+      <hr style="margin:30px 0;">
+
+      <h3>Current Annual Spend</h3>
+      <p><strong>${document.getElementById("outCurAnnual").textContent}</strong></p>
+
+      <h3>Secrets Annual Investment</h3>
+      <p><strong>${document.getElementById("outJaAnnual").textContent}</strong></p>
+
+      <hr style="margin:40px 0;">
+
+      <p style="font-size:12px;color:#666;">
+        Secrets Facebook Hack™ is owned and operated by Johnson Advertising.
+        All projections are estimates based on dealer-selected inputs.
+      </p>
+
+    </div>
+  </div>
+  `;
+
+  html2pdf().set({
+    margin:0.5,
+    filename:"Secrets-Impact-Executive-Report.pdf",
+    html2canvas:{scale:2},
+    jsPDF:{unit:'in',format:'letter',orientation:'portrait'}
+  }).from(pdfHTML).save();
 }
 
-const pdfHTML=`
-<div style="position:relative;font-family:Montserrat;padding:60px;background:#fff;min-height:1000px;overflow:hidden;">
-
-<div style="position:absolute;top:0;left:0;width:100%;height:100%;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;z-index:0;">
-${watermarkLayer}
-</div>
-
-<div style="position:relative;z-index:2;color:#000;">
-
-<div style="display:flex;justify-content:space-between;align-items:center;">
-<img src="${secretsLogo}" style="height:60px;">
-<img src="${johnsonLogo}" style="height:50px;">
-</div>
-
-<h1 style="margin-top:50px;font-size:28px;">12-Month Financial Impact Report</h1>
-
-<hr style="margin:30px 0;">
-
-<div style="font-size:42px;font-weight:800;color:${document.getElementById("impactValue").classList.contains("good")?"#1BD760":"#FF4D4D"};">
-${document.getElementById("impactValue").textContent}
-</div>
-
-<p style="margin-top:10px;">
-${document.getElementById("impactPct").textContent}
-</p>
-
-<hr style="margin:40px 0;">
-
-<p style="font-size:12px;color:#666;">
-Secrets Facebook Hack™ is owned and operated by Johnson Advertising.
-All projections are estimates based on dealer inputs.
-</p>
-
-</div>
-</div>
-`;
-
-html2pdf().set({
-margin:0.5,
-filename:"Secrets-Impact-Executive-Report.pdf",
-html2canvas:{scale:2},
-jsPDF:{unit:'in',format:'letter',orientation:'portrait'}
-}).from(pdfHTML).save();
-}
-
-calculate();
+/* Bind Button */
+document.getElementById("btnPdf").addEventListener("click", exportBrandedPDF);
 </script>
 
 </body>
